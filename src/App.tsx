@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Link
+  BrowserRouter
 } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import { Provider } from 'react-redux'
