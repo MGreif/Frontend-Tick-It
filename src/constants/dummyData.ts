@@ -4,34 +4,39 @@ const AVAILABLE_LABELS: ILabel[] = [
     {
         name: 'Label_1',
         description: 'Test Label 1',
-        Color: '#FA1234'
+        color: '#FA1234'
     },
     {
         name: 'Label_2',
         description: 'Test Label 2',
-        Color: '#FA1234'
+        color: '#FA1234'
     },
     {
         name: 'Label_3',
         description: 'Test Label 3',
-        Color: '#FA1234'
+        color: '#FA1234'
+    },
+    {
+        name: 'Important',
+        description: 'WICHTIG',
+        color: '#A21FAE'
     }
 ]
 
 const SUB_BOARDS: ISubBoard[] = [
     {
         filterCriteriaLabel: AVAILABLE_LABELS[0],
-        title: 'Currently in Progress',
+        title: 'ToDo',
         wipLimit: 4
     },
     {
         filterCriteriaLabel: AVAILABLE_LABELS[1],
-        title: 'Currently in Progress',
+        title: 'Doing',
         wipLimit: 4
     },
     {
         filterCriteriaLabel: AVAILABLE_LABELS[2],
-        title: 'Currently in Progress',
+        title: 'Done',
         wipLimit: 4
     }
 ]
@@ -53,37 +58,49 @@ const TICKETS: ITicket[] = [
         weight: 10,
         dueDate: new Date(0),
         assignee: 'Mika TODO',
-        labels: [AVAILABLE_LABELS[0]]
+        labels: [AVAILABLE_LABELS[0]],
+        createdBy: "Mika ID",
+        relatedTickets: [],
+        project: "Tick it ID"
     },
     {
         title: 'Test Ticket 2',
-        description: 'This is my first ticket',
+        description: 'This is my second ticket',
         creationDate: new Date(),
         lastModified: new Date(0),
         weight: 10,
         dueDate: new Date(0),
         assignee: 'Mika TODO',
-        labels: [AVAILABLE_LABELS[1]]
+        labels: [AVAILABLE_LABELS[1]],
+        createdBy: "Mika ID",
+        relatedTickets: [],
+        project: "Tick it ID"
     },
     {
         title: 'Test Ticket 3',
-        description: 'This is my first ticket',
+        description: 'This is my third ticket',
         creationDate: new Date(),
         lastModified: new Date(0),
         weight: 10,
         dueDate: new Date(0),
         assignee: 'Mika TODO',
-        labels: [AVAILABLE_LABELS[1]]
+        labels: [AVAILABLE_LABELS[1]],
+        createdBy: "Mika ID",
+        relatedTickets: [],
+        project: "Tick it ID"
     },
     {
         title: 'Test Ticket 4',
-        description: 'This is my first ticket',
+        description: 'This is my fourth ticket',
         creationDate: new Date(),
         lastModified: new Date(0),
         weight: 10,
         dueDate: new Date(0),
         assignee: 'Mika TODO',
-        labels: [AVAILABLE_LABELS[2]]
+        labels: [AVAILABLE_LABELS[2], AVAILABLE_LABELS[3]],
+        createdBy: "Kevin ID",
+        relatedTickets: [],
+        project: "Tick it ID"
     }
 ]
 

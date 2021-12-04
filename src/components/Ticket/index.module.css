@@ -1,0 +1,22 @@
+.weight {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.8em;
+    color: #c1c1c1;
+}
+
+.label-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.label-container > .label {
+    border-radius: 10%;
+    padding: 0.1em 0.2em;
+    margin-right: 0.5em;
+}
+
+
+.label-container > .label:last-child {
+    margin-right: 0em;
+}
