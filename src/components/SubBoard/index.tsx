@@ -5,19 +5,18 @@ import { ISubBoard } from '../types';
 import Ticket from '../Ticket';
 import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSubBoard';
 import CardTitle from './CardTitle';
+import classes from './index.module.css'
 
 interface ISubBoardProps {
-  subBoardData: ISubBoard
+  subBoardData: ISubBoard,
 }
 
 const SubBoard = ({ subBoardData }: ISubBoardProps) => {
 
   const correspondingTickets = findMatchingTicketsForSubBoard(TICKETS, subBoardData)
 
-
-
   return (
-    <Col span={8}>
+    <div className={classes.board}>
       <Card title={<CardTitle
         wipLimit={subBoardData.wipLimit}
         title={subBoardData.title}
@@ -29,7 +28,7 @@ const SubBoard = ({ subBoardData }: ISubBoardProps) => {
           ))
         }
       </Card>
-    </Col>
+    </div>
   )
 }
 

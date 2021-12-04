@@ -38,7 +38,17 @@ const SUB_BOARDS: ISubBoard[] = [
         filterCriteriaLabel: AVAILABLE_LABELS[2],
         title: 'Done',
         wipLimit: 4
-    }
+    },
+    {
+        filterCriteriaLabel: AVAILABLE_LABELS[0],
+        title: 'ToDo',
+        wipLimit: 4
+    },
+    {
+        filterCriteriaLabel: AVAILABLE_LABELS[1],
+        title: 'Doing',
+        wipLimit: 4
+    },
 ]
 
 

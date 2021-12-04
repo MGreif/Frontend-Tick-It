@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './CardTitle.module.css'
+import classes from './index.module.css'
 
 
 interface ICardTitleProps {

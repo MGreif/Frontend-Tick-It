@@ -8,11 +8,9 @@ const BoardDashboard = () => {
   return (
     <React.Fragment>
       <div className={classes['boards-container']}>
-        <Row gutter={16}>
-          {
-            BOARDS[0].subBoards.map(subBoard => <SubBoard subBoardData={subBoard} />)
-          }
-        </Row>
+        {
+          BOARDS[0].subBoards.map(subBoard => <SubBoard subBoardData={subBoard} />)
+        }
       </div>
     </React.Fragment>
   )

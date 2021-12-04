@@ -9,7 +9,11 @@ interface ITicketProps {
 
 const Ticket = ({ ticketData }: ITicketProps) => {
   return (
-    <Card title={ticketData.title} bordered={true}>
+    <Card
+      title={ticketData.title}
+      className={classes['ticket-container']}
+      bordered={true}
+    >
       <h4 className={classes.description}>{ticketData.description}</h4>
       <span className={classes.weight}>weight: {ticketData.weight}</span>
       <div className={classes['label-container']}>

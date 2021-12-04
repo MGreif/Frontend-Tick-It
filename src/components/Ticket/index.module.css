@@ -20,3 +20,12 @@
 .label-container > .label:last-child {
     margin-right: 0em;
 }
+
+.ticket-container {
+    border-radius: 2%;
+    margin-bottom: 1em;
+}
+
+.ticket-container:last-of-type {
+    margin-bottom: 0;
+}

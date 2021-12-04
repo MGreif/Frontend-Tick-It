@@ -1,0 +1,9 @@
+.board {
+    min-width: 350px;
+    margin-right: 2em;
+    width: 500px
+}
+
+.board:last-of-type {
+    margin-right: 0;
+}
