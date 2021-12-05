@@ -1,6 +1,6 @@
 import { Card } from 'antd'
 import React from 'react'
-import { ITicket } from '../types'
+import { ITicket } from '../../pages/tickets/types'
 import classes from './index.module.css'
 
 interface ITicketProps {

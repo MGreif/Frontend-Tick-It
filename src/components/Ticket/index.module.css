@@ -11,7 +11,7 @@
 }
 
 .label-container > .label {
-    border-radius: 10%;
+    border-radius: 5px;
     padding: 0.1em 0.2em;
     margin-right: 0.5em;
 }
@@ -22,7 +22,7 @@
 }
 
 .ticket-container {
-    border-radius: 2%;
+    border-radius: 6px;
     margin-bottom: 1em;
 }
 

@@ -1,11 +1,13 @@
 import React from 'react'
-import { Card, Col,  } from 'antd'
-import { TICKETS } from '../../constants/dummyData';
+import { Card } from 'antd'
 import { ISubBoard } from '../types';
 import Ticket from '../Ticket';
 import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSubBoard';
 import CardTitle from './CardTitle';
 import classes from './index.module.css'
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../redux/project.reducer';
+import { ITicket } from '../../pages/tickets/types';
 
 interface ISubBoardProps {
   subBoardData: ISubBoard,
@@ -13,13 +15,15 @@ interface ISubBoardProps {
 
 const SubBoard = ({ subBoardData }: ISubBoardProps) => {
 
-  const correspondingTickets = findMatchingTicketsForSubBoard(TICKETS, subBoardData)
+  const tickets: any = useSelector<IRootState>(state => state.rootState.tickets)
 
+  console.log("subBoarddata",subBoardData)
+  const correspondingTickets = findMatchingTicketsForSubBoard(tickets, subBoardData)
   return (
     <div className={classes.board}>
       <Card title={<CardTitle
         wipLimit={subBoardData.wipLimit}
-        title={subBoardData.title}
+        title={subBoardData.name}
         currentTicketAmount={correspondingTickets.length}
       />} bordered={true}>
         {

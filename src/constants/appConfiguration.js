@@ -5,7 +5,7 @@ import BoardDashboard from '../pages/boards/BoardDashboard';
 
 
 const ROUTE_CONFIGURATION = [
-  { title: "Boards", path: "boards", component: BoardDashboard, icon:  BookOutlined },
+  { title: "Projects", path: "projects", component: BoardDashboard, icon:  BookOutlined },
   { title: "Users", path: "users", component: UserList, icon: UserOutlined },
   { title: "Labels", path: "labels", component: LabelList, icon: TagOutlined },
   { title: "Settings", path: "settings", component: UserList, icon: SettingOutlined},
