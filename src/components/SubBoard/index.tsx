@@ -2,10 +2,10 @@ import React from 'react'
 import { Card } from 'antd'
 import { ISubBoard } from '../types';
 import Ticket from '../Ticket';
+import { useSelector } from 'react-redux';
 import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSubBoard';
 import CardTitle from './CardTitle';
 import classes from './index.module.css'
-import { useSelector } from 'react-redux';
 import { IRootState } from '../../redux/project.reducer';
 
 interface ISubBoardProps {
@@ -27,7 +27,7 @@ const SubBoard = ({ subBoardData }: ISubBoardProps) => {
       />} bordered={true}>
         {
           correspondingTickets.map(ticket => (
-            <Ticket ticketData={ticket} />
+            <Ticket key={ticket.title} ticketData={ticket} />
           ))
         }
       </Card>

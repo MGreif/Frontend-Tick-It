@@ -18,7 +18,14 @@ const Ticket = ({ ticketData }: ITicketProps) => {
       <span className={classes.weight}>weight: {ticketData.weight}</span>
       <div className={classes['label-container']}>
         {
-          ticketData.labels.map(label => <span className={classes.label} style={{backgroundColor: label.color}}>{label.name}</span>)
+          ticketData.labels.map(label => (
+            <span
+              key={label._id}
+              className={classes.label}
+              style={{ backgroundColor: label.color }}>
+              {label.name}
+            </span>
+          ))
         }
       </div>
     </Card>
