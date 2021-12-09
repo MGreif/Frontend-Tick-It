@@ -9,23 +9,24 @@ export interface IProjectState {
     labels: ILabel[],
     members: IUser[],
     tickets: ITicket[],
-    isFetching: Boolean,
-    error: any
+    name: String,
+    description: String,
+    createdBy: IUser,
+    _id: String
 }
 
 export interface IRootState {
-  rootState: IProjectState
+  projects: [],
+  activeProject: IProjectState | null,
+  isFetching: Boolean,
+  error: any
 }
 
 const initialState: IRootState = {
-  rootState: {
-    boards: [],
-    labels: [],
-    members: [],
-    tickets: [],
-    isFetching: false,
-    error: null
-  }
+  projects: [],
+  activeProject: null,
+  isFetching: false,
+  error: null
 }
 
 function projectReducer(state: IRootState = initialState, action: { type: String, payload: any }) {
@@ -33,9 +34,28 @@ function projectReducer(state: IRootState = initialState, action: { type: String
       case projectActionTypes.FETCH_REQUESTED:
         return { ...state, isFetching: true }
       case projectActionTypes.FETCH_SUCCEEDED:
-        return { ...state, isFetching: false, ...action.payload }
+        return { ...state, isFetching: false }
       case projectActionTypes.FETCH_FAILED:
         return { ...state, isFetching: false, error: action.payload }
+      case projectActionTypes.UPDATE_PROJECT_DETAILS:
+        return {
+          ...state,
+          activeProject: {
+            boards: action.payload.boards,
+            labels: action.payload.labels,
+            members: action.payload.members,
+            tickets: action.payload.tickets,
+            _id: action.payload._id,
+            createdBy: action.payload.createdBy,
+            name: action.payload.name,
+            description: action.payload.description
+          }
+        }
+      case projectActionTypes.UPDATE_PROJECTS:
+        return {
+          ...state,
+          projects: action.payload
+        }
       default:
         return state
     }
