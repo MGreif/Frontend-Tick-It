@@ -7,7 +7,6 @@ import CardTitle from './CardTitle';
 import classes from './index.module.css'
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../redux/project.reducer';
-import { ITicket } from '../../pages/tickets/types';
 
 interface ISubBoardProps {
   subBoardData: ISubBoard,
@@ -15,7 +14,7 @@ interface ISubBoardProps {
 
 const SubBoard = ({ subBoardData }: ISubBoardProps) => {
 
-  const tickets: any = useSelector<IRootState>(state => state.rootState.tickets)
+  const tickets: any = useSelector<IRootState>(state => state.activeProject?.tickets)
 
   console.log("subBoarddata",subBoardData)
   const correspondingTickets = findMatchingTicketsForSubBoard(tickets, subBoardData)

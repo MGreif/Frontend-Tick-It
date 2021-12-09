@@ -1,26 +1,19 @@
 import { Dropdown, Menu, Button } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import SubBoard from '../../components/SubBoard'
 import { IBoard } from './types'
 import classes from './BoardDashboard.module.css'
-import { useFetchProjectsByUserId } from '../../redux/hooks'
-import { useSelector } from 'react-redux'
-import { IProjectState } from '../../redux/project.reducer'
+import { useFetchProjectData } from '../../redux/hooks'
+import { useDispatch, useSelector } from 'react-redux'
+import { IProjectState, IRootState } from '../../redux/project.reducer'
 
 const BoardDashboard = () => {
-  const fetchProjects = useFetchProjectsByUserId()
-  const projects : any = useSelector<any>((state) => state.rootState.projects) || []
-  const boards : any = useSelector<any>((state) => state.rootState.boards) || []
+  const projects : any = useSelector<IRootState>((state) => state.projects) || []
+  const boards : any = useSelector<IRootState>((state) => state.activeProject?.boards) || []
   const [board, setBoard] = useState<IBoard | null>(null)
   const [project, setProject] = useState<IProjectState | null>(null)
-
-
-  useEffect(() => {
-    fetchProjects()
-  }, [])
-
-  console.log('projects', projects)
-
+  useFetchProjectData(project?._id)
+  
   const DropdownMenu = () => {
     return (
         <Menu>
