@@ -3,16 +3,13 @@ import React, {useState } from 'react'
 import SubBoard from '../../components/SubBoard'
 import { IBoard } from './types'
 import classes from './BoardDashboard.module.css'
-import { useFetchProjectData } from '../../redux/hooks'
-import { useDispatch, useSelector } from 'react-redux'
-import { IProjectState, IRootState } from '../../redux/project.reducer'
+import { useSelector } from 'react-redux'
+import { IRootState } from '../../redux/project.reducer'
+
 
 const BoardDashboard = () => {
-  const projects : any = useSelector<IRootState>((state) => state.projects) || []
   const boards : any = useSelector<IRootState>((state) => state.activeProject?.boards) || []
   const [board, setBoard] = useState<IBoard | null>(null)
-  const [project, setProject] = useState<IProjectState | null>(null)
-  useFetchProjectData(project?._id)
   
   const DropdownMenu = () => {
     return (
@@ -30,30 +27,9 @@ const BoardDashboard = () => {
     )
   }
 
-  const DropdownMenuProjects = () => {
-    return (
-        <Menu>
-          {
-            projects.map((project: any) => (
-              <Menu.Item key={project.name}>
-                <Button onClick={() => setProject(project)} > 
-                  {project.name}
-                </Button>
-              </Menu.Item>
-            ))
-          }
-        </Menu>
-    )
-  }
-
   return (
     <React.Fragment>
       <div className={classes['board-selection']}>
-        <Dropdown overlay={DropdownMenuProjects} placement="bottomLeft" arrow>
-          <Button>
-            Project Auswahl
-          </Button>
-        </Dropdown>
         <Dropdown overlay={DropdownMenu} placement="bottomLeft" arrow>
           <Button>
             Board Auswahl
