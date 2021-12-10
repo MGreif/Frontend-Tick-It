@@ -40,22 +40,19 @@ function projectReducer(state: IRootState = initialState, action: { type: String
       case projectActionTypes.UPDATE_PROJECT_DETAILS:
         return {
           ...state,
-          activeProject: {
-            boards: action.payload.boards,
-            labels: action.payload.labels,
-            members: action.payload.members,
-            tickets: action.payload.tickets,
-            _id: action.payload._id,
-            createdBy: action.payload.createdBy,
-            name: action.payload.name,
-            description: action.payload.description
-          }
+          activeProject: { ...state.activeProject, ...action.payload }
         }
       case projectActionTypes.UPDATE_PROJECTS:
         return {
           ...state,
           projects: action.payload
         }
+      case projectActionTypes.CREATE_NEW_BOARD:
+        const stateClone = { ...state }
+        if (stateClone.activeProject?.boards) {
+          stateClone.activeProject.boards = [...stateClone.activeProject.boards, action.payload]
+        }
+        return stateClone
       default:
         return state
     }

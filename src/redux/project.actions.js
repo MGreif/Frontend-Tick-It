@@ -1,4 +1,4 @@
-import { FETCH_FAILED, FETCH_REQUESTED, FETCH_SUCCEEDED, UPDATE_PROJECTS, UPDATE_PROJECT_DETAILS } from "./project.actionTypes"
+import { CREATE_NEW_BOARD, FETCH_FAILED, FETCH_REQUESTED, FETCH_SUCCEEDED, UPDATE_PROJECTS, UPDATE_PROJECT_DETAILS } from "./project.actionTypes"
 
 export const fetchRequest = () => {
   return {
@@ -32,4 +32,11 @@ export const updateProjectDetails = (projectData) => {
     type: UPDATE_PROJECT_DETAILS,
     payload: projectData
     }
+}
+
+export const createNewBoard = (boardData) => {
+  return {
+    type: CREATE_NEW_BOARD,
+    payload: boardData
+  }
 }
