@@ -8,7 +8,7 @@ import { Layout as AntdLayout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { getMenuItemBasedOnUrl } from '../../libs/getMenuItemBasedOnUrl';
 import { ROUTE_CONFIGURATION } from '../../constants/appConfiguration';
-import { useFetchProjectsByUserId } from '../../redux/hooks';
+import { useFetchProjectsByUserId } from '../../hooks/useFetchProjectsByUserId';
 import Header from './Header';
 import CreateBoard from '../../pages/boards/Create';
 
@@ -16,7 +16,7 @@ const { Content, Footer, Sider } = AntdLayout;
 
 function Layout() {
   useFetchProjectsByUserId()
-  
+
   return (
     <AntdLayout style={{ minHeight: '100vh' }}>
       <Sider collapsible >

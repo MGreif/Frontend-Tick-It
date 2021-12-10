@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Dropdown, Layout } from 'antd'
 import { useSelector } from 'react-redux'
 import classes from './Header.module.css'
 import { DownOutlined } from '@ant-design/icons'
 import Menu from 'antd/lib/menu'
-import { useFetchProjectData } from '../../redux/hooks'
+import { useFetchProjectData } from '../../hooks/useFetchProjectData'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 
 const { Header: AntdHeader } = Layout

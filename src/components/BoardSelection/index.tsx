@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import { Button, Dropdown, Input, Menu } from 'antd'
 import classes from './index.module.css'
-import { useCreateNewBoard } from '../../redux/hooks'
+import { useCreateNewBoard } from '../../hooks/useCreateNewBoard'
 
 interface IBoardSelectionProps {
   setBoard: any,
