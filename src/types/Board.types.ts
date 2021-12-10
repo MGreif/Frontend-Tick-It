@@ -1,4 +1,4 @@
-import { ISubBoard } from "../../components/types";
+import { ISubBoard } from "../components/types";
 
 export interface IBoard {
     subBoards: ISubBoard[],

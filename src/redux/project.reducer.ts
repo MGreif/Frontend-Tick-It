@@ -1,4 +1,4 @@
-import { IBoard } from '../pages/boards/types'
+import { IBoard } from '../types/Board.types'
 import { ILabel } from '../pages/labels/types'
 import { ITicket } from '../pages/tickets/types'
 import { IUser } from '../pages/users/types'

@@ -7,7 +7,6 @@ export function getMenuItemBasedOnUrl () : string {
     const currentPath = url.replace(`http://${serviceHost}:${servicePort}`, '')
 
     const match = ROUTE_CONFIGURATION.find(config => currentPath.startsWith('/' + config.path))
-    console.log(match)
     if (!match) return '1'
     const index = ROUTE_CONFIGURATION.map(config => config.path).indexOf(match.path)
     return `${index + 1}`

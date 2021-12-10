@@ -15,9 +15,8 @@ interface ISubBoardProps {
 const SubBoard = ({ subBoardData }: ISubBoardProps) => {
 
   const tickets: any = useSelector<IRootState>(state => state.activeProject?.tickets)
-
-  console.log("subBoarddata",subBoardData)
   const correspondingTickets = findMatchingTicketsForSubBoard(tickets, subBoardData)
+  
   return (
     <div className={classes.board}>
       <Card title={<CardTitle

@@ -1,7 +1,7 @@
 import { BookOutlined, SettingOutlined, TagOutlined, UserOutlined } from '@ant-design/icons'
 import UserList from '../pages/users/UserList';
 import LabelList from '../pages/labels/LabelList';
-import BoardDashboard from '../pages/boards/BoardDashboard';
+import BoardDashboard from '../pages/boards/Dashboard';
 
 
 const ROUTE_CONFIGURATION = [

@@ -4,7 +4,6 @@ import * as projectGateway from '../gateway/projects'
 import { fetchFail, updateProjectDetails, fetchRequest, fetchSuccess, updateProjects } from './project.actions'
 
 export const useFetchProjectData = (projectId) => {
-  console.log(projectId)
   const dispatch = useDispatch()
   useEffect(() => {
     if (!projectId) return
