@@ -8,7 +8,7 @@ import { Layout as AntdLayout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { getMenuItemBasedOnUrl } from '../../libs/getMenuItemBasedOnUrl';
 import { ROUTE_CONFIGURATION } from '../../constants/appConfiguration';
-import { useFetchProjectsByUserId } from '../../hooks/useFetchProjectsByUserId';
+import { useFetchProjectsByUserId } from '../../hooks/projects/useFetchProjectsByUserId';
 import Header from './Header';
 import CreateBoard from '../../pages/boards/Create';
 
