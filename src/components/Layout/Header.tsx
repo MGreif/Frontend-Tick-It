@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import classes from './Header.module.css'
 import { DownOutlined } from '@ant-design/icons'
 import Menu from 'antd/lib/menu'
-import { useFetchProjectData } from '../../hooks/useFetchProjectData'
+import { useFetchProjectData } from '../../hooks/projects/useFetchProjectData'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 
 const { Header: AntdHeader } = Layout

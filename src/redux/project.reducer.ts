@@ -3,6 +3,8 @@ import { ILabel } from '../pages/labels/types'
 import { ITicket } from '../pages/tickets/types'
 import { IUser } from '../pages/users/types'
 import * as projectActionTypes from './project.actionTypes'
+import * as subBoardActionTypes from './subBoard.actionTypes'
+import { ISubBoard } from '../components/types'
 
 export interface IProjectState {
     boards: IBoard[],
@@ -30,6 +32,8 @@ const initialState: IRootState = {
 }
 
 function projectReducer(state: IRootState = initialState, action: { type: String, payload: any }) {
+  const stateClone : IRootState = { ...state }
+
     switch (action.type) {
       case projectActionTypes.FETCH_REQUESTED:
         return { ...state, isFetching: true }
@@ -48,9 +52,14 @@ function projectReducer(state: IRootState = initialState, action: { type: String
           projects: action.payload
         }
       case projectActionTypes.CREATE_NEW_BOARD:
-        const stateClone = { ...state }
         if (stateClone.activeProject?.boards) {
           stateClone.activeProject.boards = [...stateClone.activeProject.boards, action.payload]
+        }
+        return stateClone
+      case subBoardActionTypes.CREATE_NEW_SUBBOARD:
+        const boards: IBoard[] = action.payload.subBoardData
+        if (stateClone.activeProject?.boards) {
+          stateClone.activeProject.boards = boards
         }
         return stateClone
       default:

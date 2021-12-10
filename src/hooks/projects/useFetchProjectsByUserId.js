@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchFail, fetchRequest, fetchSuccess, updateProjects } from '../redux/project.actions'
-import * as projectGateway from '../gateway/projects'
-
+import { fetchFail, fetchRequest, fetchSuccess, updateProjects } from '../../redux/project.actions'
+import * as projectGateway from '../../gateway/projects'
 export const useFetchProjectsByUserId = () => {
   const userId = "asd"
   const dispatch = useDispatch()

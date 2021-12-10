@@ -1,5 +1,5 @@
 .boardsContainer {
-    margin: 2em auto 0 auto;
+    margin: 1em auto 0 auto;
     overflow-x: auto;
     display: flex;
     justify-content: flex-start;
@@ -13,4 +13,8 @@
 
 .boardSelection {
     margin: 2em 0 0 0em;
+}
+
+.modalButton {
+    margin-left: 1em;
 }

@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { fetchFail, fetchRequest, fetchSuccess, updateProjectDetails } from "../redux/project.actions"
-import * as projectGateway from '../gateway/projects'
+import { fetchFail, fetchRequest, fetchSuccess, updateProjectDetails } from "../../redux/project.actions"
+import * as projectGateway from '../../gateway/projects'
 
-async function fetchProjectData(dispatch, projectId) {
+export async function fetchProjectData(dispatch, projectId) {
   dispatch(fetchRequest())
   try {
     const { body } = await projectGateway.fetchProjectData(projectId)
