@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { IRootState } from '../../redux/project.reducer'
+import { IProjectState, IRootState } from '../../redux/project.reducer'
 import { Button, Dropdown, Input, Menu } from 'antd'
 import classes from './index.module.css'
 import { useCreateNewBoard } from '../../redux/hooks'
 
 interface IBoardSelectionProps {
   setBoard: any,
-  board: any
+  board: any,
+  activeProject: IProjectState | null
 }
 
 const AddBoard = () => {
@@ -29,7 +30,7 @@ const AddBoard = () => {
 }
 
 const BoardSelection = (props: IBoardSelectionProps) => {
-  const activeProject: any = useSelector<IRootState>(state => state.activeProject)
+  const { activeProject } = props
   console.log("render selection")
 
   const DropdownMenu = () => {
@@ -41,14 +42,12 @@ const BoardSelection = (props: IBoardSelectionProps) => {
           boards
             .filter((boardEntry: any) => boardEntry._id !== props.board?._id)
             .map((boardItem: any) => (
-              <Menu.Item key={boardItem.name}>
-                <Button onClick={() => props.setBoard(boardItem)} className={classes.menuButton}>
+              <Menu.Item key={boardItem.name} onClick={() => props.setBoard(boardItem)}>
                   {boardItem.name}
-                </Button>
               </Menu.Item>
             ))
         }
-        <Menu.Item key="new-project">
+        <Menu.Item key="new-project" className={classes.newProjectOption}>
           <AddBoard />
         </Menu.Item>
       </Menu>
@@ -64,7 +63,7 @@ const BoardSelection = (props: IBoardSelectionProps) => {
       arrow
     >
       <Button>
-        {props.board ? props.board.name : "Board Auswahl"}
+        {props.board ? `Board - ${props.board.name}` : "Board Auswahl"}
       </Button>
     </Dropdown>
   )

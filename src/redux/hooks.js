@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as boardGateway from '../gateway/boards'
 import * as projectGateway from '../gateway/projects'
 import { fetchFail, updateProjectDetails, fetchRequest, fetchSuccess, updateProjects, createNewBoard } from './project.actions'
-import { IRootState } from './project.reducer'
 
 export const useFetchProjectData = (projectId) => {
   const dispatch = useDispatch()
@@ -33,9 +32,14 @@ export const useCreateNewBoard = () => {
   const dispatch = useDispatch()
   const projectId = useSelector(state => state.activeProject?._id)
   return async (name) => {
-    const result = await boardGateway.createNewBoard({ name, project: projectId, subBoards: [] })
-    if (result.status === 200) {
-      dispatch(createNewBoard(result.body))
+    try {
+
+      const result = await boardGateway.createNewBoard({ name, project: projectId, subBoards: [] })
+      if (result.status === 200) {
+        dispatch(createNewBoard(result.body))
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 }

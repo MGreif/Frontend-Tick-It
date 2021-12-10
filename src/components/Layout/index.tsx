@@ -16,6 +16,7 @@ const { Content, Footer, Sider } = AntdLayout;
 
 function Layout() {
   useFetchProjectsByUserId()
+  
   return (
     <AntdLayout style={{ minHeight: '100vh' }}>
       <Sider collapsible >
