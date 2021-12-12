@@ -6,7 +6,7 @@ import BoardSelection from '../../components/BoardSelection'
 import { useSelector } from 'react-redux'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import GenericModal from '../../components/GenericModal'
-import CreateSubBoardForm from '../../components/CreateSubBoardForm'
+import CreateSubBoardForm from '../../components/SubBoard/CreateSubBoardForm'
 import { useCreateNewSubBoard } from '../../hooks/useCreateNewSubBoard'
 
 const BoardDashboard = () => {

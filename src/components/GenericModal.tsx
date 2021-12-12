@@ -22,10 +22,10 @@ const GenerateModal = (config: IGenericModalProps) => {
 
   const Footer = () => {
     return <React.Fragment>
+      <Button onClick={handleClose}>Close</Button>
       {
         config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState, handleClose)}}>{action.label}</Button>)
       }
-      <Button onClick={handleClose}>Close</Button>
     </React.Fragment>
   }
 

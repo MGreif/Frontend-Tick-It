@@ -4,6 +4,7 @@ import { IProjectState, IRootState } from '../../redux/project.reducer'
 import { Button, Dropdown, Input, Menu } from 'antd'
 import classes from './index.module.css'
 import { useCreateNewBoard } from '../../hooks/useCreateNewBoard'
+import { CheckCircleOutlined } from '@ant-design/icons'
 
 interface IBoardSelectionProps {
   setBoard: any,
@@ -40,10 +41,9 @@ const BoardSelection = (props: IBoardSelectionProps) => {
       <Menu className={classes.menu}>
         {
           boards
-            .filter((boardEntry: any) => boardEntry._id !== props.board?._id)
             .map((boardItem: any) => (
               <Menu.Item key={boardItem.name} onClick={() => props.setBoard(boardItem)}>
-                  {boardItem.name}
+                <span>{boardItem.name} {boardItem._id === props.board?._id && <CheckCircleOutlined color="green"/>}</span>
               </Menu.Item>
             ))
         }
