@@ -1,0 +1,9 @@
+.labelContainer {
+  margin-left: 2em;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
