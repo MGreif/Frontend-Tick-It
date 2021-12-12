@@ -2,6 +2,7 @@ import { Card } from 'antd'
 import React from 'react'
 import { ITicket } from '../../pages/tickets/types'
 import classes from './index.module.css'
+import Label from '../Label'
 
 interface ITicketProps {
   ticketData: ITicket
@@ -18,14 +19,7 @@ const Ticket = ({ ticketData }: ITicketProps) => {
       <span className={classes.weight}>weight: {ticketData.weight}</span>
       <div className={classes['label-container']}>
         {
-          ticketData.labels.map(label => (
-            <span
-              key={label._id}
-              className={classes.label}
-              style={{ backgroundColor: label.color }}>
-              {label.name}
-            </span>
-          ))
+          ticketData.labels.map(label => <Label labelData={label}/>)
         }
       </div>
     </Card>
