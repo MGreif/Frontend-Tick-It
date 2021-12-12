@@ -26,7 +26,7 @@ const GenerateModal = (config: IGenericModalProps) => {
     return <React.Fragment>
       <Button onClick={handleClose}>Close</Button>
       {
-        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState); handleClose()}}>{action.label}</Button>)
+        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState); handleClose()}} {...(action.buttonProps || {})}>{action.label}</Button>)
       }
     </React.Fragment>
   }

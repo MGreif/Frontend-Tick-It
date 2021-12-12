@@ -4,6 +4,7 @@ export function getMenuItemBasedOnUrl () : string {
     const url = window.location.href
     const serviceHost = process.env.REACT_APP_SERVICE_HOST
     const servicePort = process.env.REACT_APP_SERVICE_PORT
+    console.log(serviceHost, servicePort)
     const currentPath = url.replace(`http://${serviceHost}:${servicePort}`, '')
 
     const match = ROUTE_CONFIGURATION.find(config => currentPath.startsWith('/' + config.path))

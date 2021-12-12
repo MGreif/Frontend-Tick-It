@@ -3,9 +3,9 @@ import { ILabel } from "../labels/types";
 export interface ITicket {
     title: string,
     description: string,
-    creationDate: Date,
+    createdAt: Date,
     createdBy: string,
-    lastModified: Date,
+    updatedAt: Date,
     weight: number,
     dueDate: Date,
     assignee: string,

@@ -10,13 +10,6 @@
     justify-content: flex-start;
 }
 
-.label-container > .label {
-    border-radius: 5px;
-    padding: 0.1em 0.2em;
-    margin-right: 0.5em;
-}
-
-
 .label-container > .label:last-child {
     margin-right: 0em;
 }

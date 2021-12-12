@@ -20,7 +20,7 @@ const CardTitle = ({ subBoardData, currentTicketAmount }: ICardTitleProps) => {
           buttonLabel={<DeleteOutlined />}
           title="Delete Board Tile"
           content={() => <div>Are you sure, that you want to delete the Board Tile?</div>}
-          actions={[{label: "Delete", function: () => deleteSubBoard(subBoardData._id), buttonProps: {style: {backgroundColor: "red"}}} ]}
+          actions={[{label: "Delete", function: () => deleteSubBoard(subBoardData._id), buttonProps: {style: { color: "red", borderColor: "red"}}}]}
           buttonProps={{type: "dashed", className: classes.deleteButton, size:"middle"}}
         />
         <span className={currentTicketAmount > subBoardData.wipLimit ? classes.overflow : ''}>{currentTicketAmount} / {subBoardData.wipLimit}</span>
