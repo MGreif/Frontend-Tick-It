@@ -13,4 +13,11 @@ const createNewSubBoard: any = (subBoardData: ISubBoard, boardId: string) => {
     .send({ ...subBoardData, boardId })
 }
 
-export { createNewSubBoard }
+const deleteSubBoard: any = (subBoardId: number) => {
+  if (!subBoardId) return
+  const url = baseUrl + `/subBoards/${subBoardId}`
+  return superagent
+    .delete(url)
+}
+
+export { createNewSubBoard, deleteSubBoard }

@@ -1,7 +1,7 @@
 import { Breadcrumb } from "antd"
 import React from "react"
 
-export default () => {
+const LabelList = () => {
     return (
         <React.Fragment>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -11,3 +11,5 @@ export default () => {
         </React.Fragment>
     )
 }
+
+export default LabelList

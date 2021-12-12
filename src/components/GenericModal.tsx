@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Modal as AntdModal, Button } from 'antd';
+import { ButtonProps } from 'antd/lib/button'
 
 interface IGenericModalProps {
   title: string,
   content: React.FC<{ setInnerState: any, innerState: any }>,
-  actions: [{ label: string, function: Function, buttonProps?: any }],
-  buttonLabel: string,
+  actions: [{ label: string, function: Function, buttonProps?: ButtonProps }],
+  buttonLabel: any,
   buttonClass?: any
+  buttonProps?: ButtonProps
 }
 
 const GenerateModal = (config: IGenericModalProps) => {
@@ -24,13 +26,13 @@ const GenerateModal = (config: IGenericModalProps) => {
     return <React.Fragment>
       <Button onClick={handleClose}>Close</Button>
       {
-        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState, handleClose)}}>{action.label}</Button>)
+        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState); handleClose()}}>{action.label}</Button>)
       }
     </React.Fragment>
   }
 
   return <React.Fragment>
-    <Button type="primary" onClick={showModal} className={config.buttonClass || ''}>
+    <Button type="primary" onClick={showModal} className={config.buttonClass || ''} {...(config.buttonProps || {})}>
       {config.buttonLabel}
     </Button>
 

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import GenericModal from '../../components/GenericModal'
 import CreateSubBoardForm from '../../components/SubBoard/CreateSubBoardForm'
-import { useCreateNewSubBoard } from '../../hooks/useCreateNewSubBoard'
+import { useCreateNewSubBoard } from '../../hooks/subBoards/useCreateNewSubBoard'
 
 const BoardDashboard = () => {
   const [board, setBoard] = useState<IBoard | null>(null)
@@ -31,7 +31,7 @@ const BoardDashboard = () => {
         <GenericModal
           title="Create new Board Tile"
           buttonLabel="New Board Tile"
-          actions={[{label: "Submit", function: (data: any, close: any) => { createNewSubBoard(data, board?._id); close()}}]}
+          actions={[{label: "Submit", function: (data: any) => createNewSubBoard(data, board?._id)}]}
           content={CreateSubBoardForm}
           buttonClass={classes.modalButton}
         />

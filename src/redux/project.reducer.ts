@@ -4,7 +4,6 @@ import { ITicket } from '../pages/tickets/types'
 import { IUser } from '../pages/users/types'
 import * as projectActionTypes from './project.actionTypes'
 import * as subBoardActionTypes from './subBoard.actionTypes'
-import { ISubBoard } from '../components/types'
 
 export interface IProjectState {
     boards: IBoard[],

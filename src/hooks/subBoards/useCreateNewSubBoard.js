@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import * as subBoardGateway from '../gateway/subBoards'
-import { fetchProjectData } from "./projects/useFetchProjectData"
+import * as subBoardGateway from '../../gateway/subBoards'
+import { fetchProjectData } from "../projects/useFetchProjectData"
 
 export const useCreateNewSubBoard = () => {
   const dispatch = useDispatch()

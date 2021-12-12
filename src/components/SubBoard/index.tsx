@@ -20,8 +20,7 @@ const SubBoard = ({ subBoardData }: ISubBoardProps) => {
   return (
     <div className={classes.board}>
       <Card title={<CardTitle
-        wipLimit={subBoardData.wipLimit}
-        title={subBoardData.name}
+        subBoardData={subBoardData}
         currentTicketAmount={correspondingTickets.length}
       />} bordered={true}>
         {
