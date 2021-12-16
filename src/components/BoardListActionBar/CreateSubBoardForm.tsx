@@ -24,14 +24,14 @@ const CreateSubBoardForm = (props: ICreateSubBoardForm) => {
     }
   }, [props.innerState, form])
 
-  return <Form onValuesChange={() => props.setInnerState(form.getFieldsValue())} layout="vertical" form={form} initialValues={props.initialValues}>
+  return <Form onValuesChange={(e) => props.setInnerState({ ...props.innerState, ...e})} layout="vertical" form={form} initialValues={props.initialValues}>
       <Form.Item label="Name" name="name">
         <Input placeholder="input placeholder" />
       </Form.Item>
       <Form.Item label="Filter criteria" name="filterCriteriaLabel">
-        <Select style={{ width: 180 }} onChange={(value) => props.setInnerState({filterCriteriaLabel: value})}>
+        <Select style={{ width: 180 }} onChange={(value) => props.setInnerState({...props.innerState, filterCriteriaLabel: value})}>
         {
-          labels && labels.map(label => <Option value={label._id}><Label labelData={label}/></Option>)
+          labels && labels.map(label => <Option value={label._id} key={label._id}><Label labelData={label}/></Option>)
         }
         </Select>
       </Form.Item>

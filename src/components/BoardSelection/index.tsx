@@ -32,13 +32,11 @@ const AddBoard = () => {
 
 const BoardSelection = (props: IBoardSelectionProps) => {
   const { activeProject } = props
-  console.log("render selection")
 
   const DropdownMenu = () => {
   const boards: any = useSelector<IRootState>(state => state.activeProject?.boards)
-    console.log("render Menu")
     return (
-      <Menu className={classes.menu}>
+      <Menu className={classes.menu} >
         {
           boards
             .map((boardItem: any) => (

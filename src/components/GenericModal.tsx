@@ -14,6 +14,7 @@ interface IGenericModalProps {
 const GenerateModal = (config: IGenericModalProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [innerState, setInnerState] = useState({})
+
   const showModal = () => {
     setIsModalVisible(true)
   };
