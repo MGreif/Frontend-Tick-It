@@ -1,8 +1,8 @@
 import { Card } from 'antd'
 import React from 'react'
-import { ITicket } from '../../pages/tickets/types'
+import { ITicket } from '../../../pages/tickets/types'
 import classes from './index.module.css'
-import Label from '../Label'
+import Label from '../../Label'
 
 interface ITicketProps {
   ticketData: ITicket

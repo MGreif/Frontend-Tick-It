@@ -17,7 +17,7 @@ const BoardListActionBar = ({ setBoard, board, activeProject }: IBoardListAction
   const createNewSubBoard = useCreateNewSubBoard()
 
   return (
-    <div className={classes.boardSelection}>
+    <div>
     <BoardSelection setBoard={setBoard} board={board} activeProject={activeProject} />
     <GenericModal
       title="Create new Board Tile"

@@ -10,7 +10,7 @@ import { getMenuItemBasedOnUrl } from '../../libs/getMenuItemBasedOnUrl';
 import { ROUTE_CONFIGURATION } from '../../constants/appConfiguration';
 import { useFetchProjectsByUserId } from '../../hooks/projects/useFetchProjectsByUserId';
 import Header from './Header';
-import CreateBoard from '../../pages/boards/Create';
+import CreateTicket from '../../pages/tickets/CreateTicket';
 
 const { Content, Footer, Sider } = AntdLayout;
 
@@ -33,9 +33,9 @@ function Layout() {
         <Content style={{ margin: '0 16px' }}>
           <Switch>
             {
-              ROUTE_CONFIGURATION.map(config => <Route key={config.title} path={'/' + config.path} component={config.component} />
+              ROUTE_CONFIGURATION.map(config => <Route key={config.title} path={'/' + config.path} component={config.component} exact/>
               )}
-            <Route path="/new-board" component={CreateBoard as any}/>
+            <Route path="/tickets/create" component={CreateTicket as any}/>
             <Route path="/" component={() => <span>Home</span>} />
             <Route path="*" component={() => <span>404 - Path not found</span>} />
           </Switch>

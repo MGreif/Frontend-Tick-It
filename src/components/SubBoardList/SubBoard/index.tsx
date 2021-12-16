@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'antd'
 import { ISubBoard } from '../../types';
-import Ticket from '../../Ticket';
+import Ticket from '../../TicketList/Ticket';
 import { useSelector } from 'react-redux';
 import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSubBoard';
 import CardTitle from './CardTitle';
@@ -19,10 +19,13 @@ const SubBoard = ({ subBoardData }: ISubBoardProps) => {
   
   return (
     <div className={classes.board}>
-      <Card title={<CardTitle
-        subBoardData={subBoardData}
-        currentTicketAmount={correspondingTickets.length}
-      />} bordered={true}>
+      <Card
+        title={<CardTitle
+          subBoardData={subBoardData}
+          currentTicketAmount={correspondingTickets.length}
+        />}
+        bordered={true}
+      >
         {
           correspondingTickets.map(ticket => (
             <Ticket key={ticket.title} ticketData={ticket} />
