@@ -1,0 +1,15 @@
+.listItem {
+  border: 1px solid gray !important;
+  border-radius: 5px;
+  margin-bottom: 0.2em;
+  padding: 0.3em 0.8em !important;
+  max-width: 800px;
+}
+
+.listItem:last-of-type {
+  margin-bottom: 0;
+}
+
+.list {
+  padding: 0.5em
+}

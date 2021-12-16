@@ -1,0 +1,7 @@
+.listContainer > .listRow:first-of-type {
+  margin-top: 5em;
+}
+
+.listContainer > .listRow {
+  margin: 1em 0;
+}
