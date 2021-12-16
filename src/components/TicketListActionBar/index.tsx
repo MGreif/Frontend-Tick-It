@@ -1,6 +1,6 @@
 import { Button } from 'antd'
 import React from 'react'
-import classes from './ActionBar.module.css'
+import classes from './index.module.css'
 
 const ActionBar = () => {
   return (

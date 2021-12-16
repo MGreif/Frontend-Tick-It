@@ -1,8 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'antd'
-import TicketList from '../../components/Ticket/TicketList'
+import TicketList from '../../components/TicketList'
 import classes from './List.module.css'
-import ActionBar from '../../components/Ticket/ActionBar'
+import ActionBar from '../../components/TicketListActionBar'
 
 const List = () => {
   return (

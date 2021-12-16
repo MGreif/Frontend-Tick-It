@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, Input, Select } from 'antd';
 import { useSelector } from 'react-redux';
-import { IRootState } from '../../redux/project.reducer';
-import { ILabel } from '../../pages/labels/types';
+import { IRootState } from '../../../redux/project.reducer';
+import { ILabel } from '../../../pages/labels/types';
 
 interface ICreateSubBoardForm {
   setInnerState: any,

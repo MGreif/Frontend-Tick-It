@@ -1,13 +1,12 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import SubBoard from '../../components/SubBoard'
+import { Col, Row } from 'antd'
+import SubBoard from '../../components/SubBoardList/SubBoard'
 import { IBoard } from '../../types/Board.types'
 import classes from './Dashboard.module.css'
-import BoardSelection from '../../components/BoardSelection'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
-import GenericModal from '../../components/GenericModal'
-import CreateSubBoardForm from '../../components/SubBoard/CreateSubBoardForm'
-import { useCreateNewSubBoard } from '../../hooks/subBoards/useCreateNewSubBoard'
+import BoardListActionBar from '../../components/BoardListActionBar'
+import SubBoardList from '../../components/SubBoardList'
 
 const BoardDashboard = () => {
   const [board, setBoard] = useState<IBoard | null>(null)
@@ -21,31 +20,25 @@ const BoardDashboard = () => {
   }, [activeProject, board?._id])
 
   console.log("update", activeProject)
-  const createNewSubBoard = useCreateNewSubBoard()
   if (!activeProject) return null
 
   return (
-    <React.Fragment>
-      <div className={classes.boardSelection}>
-        <BoardSelection setBoard={setBoard} board={board} activeProject={activeProject}/>
-        <GenericModal
-          title="Create new Board Tile"
-          buttonLabel="New Board Tile"
-          actions={[{label: "Submit", function: (data: any) => createNewSubBoard(data, board?._id)}]}
-          content={CreateSubBoardForm}
-          buttonClass={classes.modalButton}
-        />
-      </div>
-      <div className={classes.boardsContainer}>
-        {
-          board?.subBoards?.length
-          ? board.subBoards.map(subBoard => <SubBoard subBoardData={subBoard} key={subBoard.name} />)
-          : <div>
-              <div>No Board Tiles available</div>
-            </div>
-        }
-      </div>
-    </React.Fragment>
+    <div className={classes.listContainer}>
+      <Row gutter={[16, 16]} className={classes.listRow}>
+        <Col span={3}>left</Col>
+        <Col span={18}>
+          <BoardListActionBar board={board} setBoard={setBoard} activeProject={activeProject}/>
+        </Col>
+        <Col span={3}>right</Col>
+      </Row>
+      <Row gutter={[16, 16]} className={classes.listRow}>
+        <Col span={3}>left</Col>
+        <Col span={18}>
+            <SubBoardList board={board}/>
+        </Col>
+        <Col span={3}>right</Col>
+      </Row>
+    </div>
   )
 }
 

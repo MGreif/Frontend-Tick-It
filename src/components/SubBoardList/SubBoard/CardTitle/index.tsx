@@ -1,9 +1,9 @@
 import React from 'react'
-import { ISubBoard } from '../../types'
+import { ISubBoard } from '../../../types'
 import classes from './index.module.css'
-import GenericModal from '../../GenericModal'
+import GenericModal from '../../../GenericModal'
 import { DeleteOutlined } from '@ant-design/icons'
-import { useDeleteSubBoard } from '../../../hooks/subBoards/useDeleteSubBoard'
+import { useDeleteSubBoard } from '../../../../hooks/subBoards/useDeleteSubBoard'
 
 interface ICardTitleProps {
   subBoardData: ISubBoard

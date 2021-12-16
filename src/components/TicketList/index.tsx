@@ -1,9 +1,9 @@
 import React from 'react'
 import { List } from 'antd'
 import TicketListItem from './TicketListItem'
-import { ITicket } from '../../../pages/tickets/types'
+import { ITicket } from '../../pages/tickets/types'
 import { useSelector } from 'react-redux'
-import { IRootState } from '../../../redux/project.reducer'
+import { IRootState } from '../../redux/project.reducer'
 import classes from './index.module.css'
 
 const TicketList = () => {
