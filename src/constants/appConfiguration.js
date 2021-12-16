@@ -1,6 +1,6 @@
 import { BookOutlined, ContainerOutlined, SettingOutlined, TagOutlined, UserOutlined } from '@ant-design/icons'
 import UserList from '../pages/users/UserList';
-import LabelList from '../pages/labels/LabelList';
+import LabelList from '../pages/labels/List';
 import BoardDashboard from '../pages/boards/Dashboard';
 import TicketList from '../pages/tickets/List';
 

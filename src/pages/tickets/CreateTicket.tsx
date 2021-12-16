@@ -5,18 +5,18 @@ import classes from './List.module.css'
 import ActionBar from '../../components/TicketListActionBar'
 import TicketForm from '../../components/TicketForm'
 
-const CreateTicket = () => {
+const CreateTicket = ({ history }: any) => {
   return (
     <div className={classes.listContainer}>
       <Row gutter={[16, 16]} className={classes.listRow}>
-        <Col span={5}>left</Col>
-        <Col span={14}><TicketForm /></Col>
-        <Col span={5}>right</Col>
+        <Col span={5}></Col>
+        <Col span={14}><TicketForm history={history}/></Col>
+        <Col span={5}></Col>
       </Row>
       <Row gutter={[16, 16]} className={classes.listRow}>
-      <Col span={5}>left</Col>
-      <Col span={14}><span>abc</span></Col>
-      <Col span={5}>right</Col>
+      <Col span={5}></Col>
+      <Col span={14}></Col>
+      <Col span={5}></Col>
       </Row>
     </div>
   )

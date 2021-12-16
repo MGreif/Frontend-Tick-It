@@ -10,15 +10,13 @@ interface ITicketListItemProps {
 
 const TicketListItem = ({ ticketData }: ITicketListItemProps) => {
   return (
-  <React.Fragment>
     <div className={classes.container}>
       <span>
         {ticketData.title}
-        <span className={classes.labelContainer}>{ticketData.labels.map(label => <Label labelData={label} key={label._id}/>)}</span>
+        <span className={classes.labelContainer}>{ticketData.labels.map(label => <Label labelData={label} key={label._id} />)}</span>
       </span>
       <span>{getRelativeTime(new Date(ticketData.createdAt))}</span>
     </div>
-  </React.Fragment>
   )
 }
 

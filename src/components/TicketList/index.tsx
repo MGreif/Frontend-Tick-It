@@ -8,14 +8,14 @@ import classes from './index.module.css'
 
 const TicketList = () => {
 
-  const Tickets = useSelector<IRootState, ITicket[] | undefined>(state => state.activeProject?.tickets)
+  const tickets = useSelector<IRootState, ITicket[] | undefined>(state => state.activeProject?.tickets)
 
   return (
     <List
     className={classes.list}
     bordered
     itemLayout="horizontal"
-    dataSource={Tickets || []}
+    dataSource={tickets || []}
     header={<b>Tickets</b>}
     renderItem={(ticket: ITicket) => (
       <List.Item className={classes.listItem}>

@@ -1,8 +1,8 @@
-import React from 'react'
-import classes from './index.module.css'
+import React, { useEffect } from 'react'
 import { Form, Input, Button, InputNumber, DatePicker, AutoComplete, Select } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import classes from './index.module.css'
 import { IProjectState, IRootState } from '../../redux/project.reducer';
 import Label from '../Label';
 import { useCreateNewTicket } from '../../hooks/useCreateNewTicket';
@@ -10,7 +10,11 @@ import { useCreateNewTicket } from '../../hooks/useCreateNewTicket';
 const { TextArea } = Input
 const { Option } = Select
 
-const TicketForm = () => {
+interface ITicketFormProps {
+  history: any
+}
+
+const TicketForm = ({ history }: ITicketFormProps) => {
   const [form] = Form.useForm();
   const activeProject = useSelector<IRootState, IProjectState | null>(state => state.activeProject)
   const createNewTicket = useCreateNewTicket()
@@ -18,16 +22,14 @@ const TicketForm = () => {
   const handleFinish = (fieldsValue: any) => {
     const data = {
       ...fieldsValue,
-      createdBy: "61ac087a5ea297b9314cf278",
-      relatedTickets: [],
+      createdBy: "61ac087a5ea297b9314cf278", //TODO
+      relatedTickets: [], // TODO
       project: activeProject?._id,
       closed: false
     }
 
-    createNewTicket(data)
+    createNewTicket(data).then(() => history.push('/tickets'))
   }
-
-  // createdBy, related Tickets, project, closed TODO
 
   if (!activeProject) return null
 
@@ -48,20 +50,20 @@ const TicketForm = () => {
         <Form.Item label="Description" name="description" initialValue="">
           <TextArea placeholder="This is a sample ticket" rows={7} style={{ width: "100%" }} />
         </Form.Item>
-        <Form.Item style={{ marginBottom: 0 }} className={classes.doubleItemContainer}>
-          <Form.Item label="Weight" name="weight" className={classes.doubleItem}>
+        <Form.Item style={{ marginBottom: 0 }}>
+          <Form.Item label="Weight" name="weight" className={classes.tripleItem}>
             <InputNumber addonBefore={<ExclamationCircleOutlined />} placeholder="4" />
           </Form.Item>
-          <Form.Item label="Due Date" name="dueDate" className={classes.doubleItem}>
-            <DatePicker />
+          <Form.Item label="Due Date" name="dueDate" className={classes.tripleItem}>
+            <DatePicker style={{width: "100%"}} />
           </Form.Item>
-        </Form.Item>
-        <Form.Item label="Assignee" name="assignee">
-          <AutoComplete
-            options={activeProject?.members.map(member => ({ value: member._id, label: member.name }))}
-            style={{ width: 200 }}
-            placeholder="Max Musterman"
-          />
+          <Form.Item label="Assignee" name="assignee" className={classes.tripleItem}>
+            <AutoComplete
+              options={activeProject?.members.map(member => ({ value: member._id, label: member.name }))}
+              style={{ width: 200 }}
+              placeholder="Max Musterman"
+            />
+          </Form.Item>
         </Form.Item>
         <Form.Item label="Labels" name="labels" >
           <Select mode="multiple"

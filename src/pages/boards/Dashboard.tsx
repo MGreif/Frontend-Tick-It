@@ -25,18 +25,18 @@ const BoardDashboard = () => {
   return (
     <div className={classes.listContainer}>
       <Row gutter={[16, 16]} className={classes.listRow}>
-        <Col span={3}>left</Col>
+        <Col span={3}></Col>
         <Col span={18}>
           <BoardListActionBar board={board} setBoard={setBoard} activeProject={activeProject}/>
         </Col>
-        <Col span={3}>right</Col>
+        <Col span={3}></Col>
       </Row>
       <Row gutter={[16, 16]} className={classes.listRow}>
-        <Col span={3}>left</Col>
+        <Col span={3}></Col>
         <Col span={18}>
             <SubBoardList board={board}/>
         </Col>
-        <Col span={3}>right</Col>
+        <Col span={3}></Col>
       </Row>
     </div>
   )

@@ -7,7 +7,6 @@ export const useCreateNewBoard = () => {
   const projectId = useSelector(state => state.activeProject?._id)
   return async (name) => {
     try {
-
       const result = await boardGateway.createNewBoard({ name, project: projectId, subBoards: [] })
       if (result.status === 200) {
         dispatch(createNewBoard(result.body))

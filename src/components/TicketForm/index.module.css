@@ -6,3 +6,13 @@
 .doubleItem:last-of-type {
   margin: 0 0 0 16px
 }
+
+.tripleItem {
+  display: inline-block;
+  width: calc(33% - 6px);
+  margin-right: 8px;
+}
+
+.doubleItem:last-of-type {
+  margin-right: 0;
+}

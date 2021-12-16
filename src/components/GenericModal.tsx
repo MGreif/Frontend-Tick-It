@@ -4,7 +4,7 @@ import { ButtonProps } from 'antd/lib/button'
 
 interface IGenericModalProps {
   title: string,
-  content: React.FC<{ setInnerState: any, innerState: any }>,
+  content: React.FC<{ setInnerState: any, innerState: any, initialValues: any }>,
   actions: [{ label: string, function: Function, buttonProps?: ButtonProps }],
   buttonLabel: any,
   buttonClass?: any
@@ -20,13 +20,14 @@ const GenerateModal = (config: IGenericModalProps) => {
 
   const handleClose = () => {
     setIsModalVisible(false)
+    setInnerState({})
   };
 
   const Footer = () => {
     return <React.Fragment>
       <Button onClick={handleClose}>Close</Button>
       {
-        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState); handleClose()}} {...(action.buttonProps || {})}>{action.label}</Button>)
+        config.actions.map(action => <Button key={action.label} onClick={() => { action.function(innerState); handleClose() }} {...(action.buttonProps || {})}>{action.label}</Button>)
       }
     </React.Fragment>
   }
@@ -37,7 +38,7 @@ const GenerateModal = (config: IGenericModalProps) => {
     </Button>
 
     <AntdModal title={config.title} visible={isModalVisible} onCancel={handleClose} footer={<Footer />} >
-      <config.content setInnerState={(data: any) => setInnerState({ ...innerState, ...data })} innerState={innerState}/>
+      <config.content setInnerState={(data: any) => setInnerState(data)} innerState={innerState} initialValues={innerState} />
     </AntdModal>
   </React.Fragment>
 }

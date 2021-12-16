@@ -11,6 +11,7 @@ import { ROUTE_CONFIGURATION } from '../../constants/appConfiguration';
 import { useFetchProjectsByUserId } from '../../hooks/projects/useFetchProjectsByUserId';
 import Header from './Header';
 import CreateTicket from '../../pages/tickets/CreateTicket';
+import CreateLabel from '../../pages/labels/CreateLabel';
 
 const { Content, Footer, Sider } = AntdLayout;
 
@@ -36,6 +37,7 @@ function Layout() {
               ROUTE_CONFIGURATION.map(config => <Route key={config.title} path={'/' + config.path} component={config.component} exact/>
               )}
             <Route path="/tickets/create" component={CreateTicket as any}/>
+            <Route path="/labels/create" component={CreateLabel as any}/>
             <Route path="/" component={() => <span>Home</span>} />
             <Route path="*" component={() => <span>404 - Path not found</span>} />
           </Switch>
