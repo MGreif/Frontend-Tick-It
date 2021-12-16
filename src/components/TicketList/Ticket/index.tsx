@@ -15,7 +15,6 @@ const Ticket = ({ ticketData }: ITicketProps) => {
       className={classes['ticket-container']}
       bordered={true}
     >
-      <h4 className={classes.description}>{ticketData.description}</h4>
       <span className={classes.weight}>weight: {ticketData.weight}</span>
       <div className={classes['label-container']}>
         {

@@ -1,3 +1,4 @@
+import { Card } from 'antd'
 import React from 'react'
 import { getRelativeTime } from '../../libs/getRelativeTimeUntilNow'
 import { ITicket } from '../../pages/tickets/types'
@@ -10,13 +11,15 @@ interface ITicketListItemProps {
 
 const TicketListItem = ({ ticketData }: ITicketListItemProps) => {
   return (
-    <div className={classes.container}>
-      <span>
-        {ticketData.title}
-        <span className={classes.labelContainer}>{ticketData.labels.map(label => <Label labelData={label} key={label._id} />)}</span>
-      </span>
-      <span>{getRelativeTime(new Date(ticketData.createdAt))}</span>
-    </div>
+    <Card className={classes.card}>
+      <div className={classes.container}>
+        <span>
+          {ticketData.title}
+          <span className={classes.labelContainer}>{ticketData.labels.map(label => <Label labelData={label} key={label._id} />)}</span>
+        </span>
+        <span>{getRelativeTime(new Date(ticketData.createdAt))}</span>
+      </div>
+    </Card>
   )
 }
 
