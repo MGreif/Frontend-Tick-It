@@ -1,24 +1,32 @@
 .weight {
     position: absolute;
-    bottom: 0.5em;
-    right: 0.8em;
+    bottom: -1em;
+    right: 0em;
     color: #c1c1c1;
 }
 
-.label-container {
+.dueDate {
+    position: absolute;
+    bottom: -1em;
+    left: 0em;
+    color: #c1c1c1;
+}
+
+.labelContainer {
     display: flex;
     justify-content: flex-start;
 }
 
-.label-container > .label:last-child {
+.labelContainer > .label:last-child {
     margin-right: 0em;
 }
 
-.ticket-container {
+.ticketContainer {
     border-radius: 6px;
     margin-bottom: 1em;
 }
 
-.ticket-container:last-of-type {
+
+.ticketContainer:last-of-type {
     margin-bottom: 0;
 }

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container > span {
+  padding: 0.21em;
+}
+
+.container:hover > .iconButton {
+  display: inline;
+}
+
+.iconButton {
+  display: none;
+}

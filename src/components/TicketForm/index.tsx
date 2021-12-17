@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import classes from './index.module.css'
 import { IProjectState, IRootState } from '../../redux/project.reducer';
 import Label from '../Label';
-import { useCreateNewTicket } from '../../hooks/useCreateNewTicket';
+import { useCreateNewTicket } from '../../hooks/tickets/useCreateNewTicket';
 
 const { TextArea } = Input
 const { Option } = Select
@@ -54,7 +54,7 @@ const TicketForm = ({ history }: ITicketFormProps) => {
           <Form.Item label="Weight" name="weight" className={classes.tripleItem}>
             <InputNumber addonBefore={<ExclamationCircleOutlined />} placeholder="4" />
           </Form.Item>
-          <Form.Item label="Due Date" name="dueDate" className={classes.tripleItem}>
+          <Form.Item label="Due Date" name="dateDue" className={classes.tripleItem}>
             <DatePicker style={{width: "100%"}} />
           </Form.Item>
           <Form.Item label="Assignee" name="assignee" className={classes.tripleItem}>

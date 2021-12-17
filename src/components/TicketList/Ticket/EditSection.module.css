@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container > * {
+  margin-right: 1em;
+}
+
+.container > *:last-of-type {
+  margin-right: 0em;
+}
+
+.buttonContainer > * {
+  margin-right: 0.5em;
+
+}
+
+.buttonContainer > *:last-of-type {
+  margin-right: 0em;
+}
+
+.weightInput {
+  width: 130px;
+}

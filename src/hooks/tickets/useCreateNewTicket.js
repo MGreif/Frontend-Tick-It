@@ -1,4 +1,4 @@
-import * as ticketGateway from '../gateway/tickets'
+import * as ticketGateway from '../../gateway/tickets'
 
 export const useCreateNewTicket = () => {
   return async (ticketData) => {
