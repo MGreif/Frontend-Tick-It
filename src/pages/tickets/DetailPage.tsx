@@ -23,13 +23,13 @@ const DetailPage = () => {
         title="Ticket Details"
         breadcrumb={<Breadcrumb separator=">">
           <Breadcrumb.Item ><Link to={'/projects'}>Boards</Link></Breadcrumb.Item>
-        <Breadcrumb.Item >Ticket Details</Breadcrumb.Item>
-      </Breadcrumb>}
+          <Breadcrumb.Item >Ticket Details</Breadcrumb.Item>
+        </Breadcrumb>}
       />
       <Row gutter={[16, 16]} className={classes.listRow}>
         <Col span={3}></Col>
         <Col span={18}>
-          <TicketDetails ticketData={ticket}/>
+          <TicketDetails ticketData={ticket} />
         </Col>
         <Col span={3}></Col>
       </Row>

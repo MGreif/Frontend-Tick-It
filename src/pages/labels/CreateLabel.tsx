@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const CreateLabel = ({ history }: any) => {
   return (
     <div className={classes.listContainer}>
-            <PageHeader
+      <PageHeader
         title="Create Label"
         breadcrumb={<Breadcrumb separator=">">
           <Breadcrumb.Item ><Link to={'/labels'}>Labels</Link></Breadcrumb.Item>
@@ -15,13 +15,13 @@ const CreateLabel = ({ history }: any) => {
         </Breadcrumb>} />
       <Row gutter={[16, 16]} className={classes.listRow}>
         <Col span={5}></Col>
-        <Col span={14}><LabelForm history={history}/></Col>
+        <Col span={14}><LabelForm history={history} /></Col>
         <Col span={5}></Col>
       </Row>
       <Row gutter={[16, 16]} className={classes.listRow}>
-      <Col span={5}></Col>
-      <Col span={14}></Col>
-      <Col span={5}></Col>
+        <Col span={5}></Col>
+        <Col span={14}></Col>
+        <Col span={5}></Col>
       </Row>
     </div>
   )
