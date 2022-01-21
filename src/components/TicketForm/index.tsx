@@ -54,6 +54,7 @@ const TicketForm = ({ history }: ITicketFormProps) => {
         </Form.Item>
         <Form.Item label="Description" name="description" initialValue="">
           <TextArea
+            onChange={e => form.setFieldsValue({[e.target.name]: e.target.innerHTML})}
             placeholder="This is a sample ticket"
             rows={7}
             style={{ width: '100%' }}

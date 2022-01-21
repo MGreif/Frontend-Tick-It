@@ -29,7 +29,7 @@ const Ticket = ({ ticketData }: ITicketProps) => {
 
   return (
     <Card
-      title={<CardTitle onClick={handleClick} title={ticketData.title}/>}
+      title={<CardTitle onClick={handleClick} title={ticketData.title} _id={ticketData._id}/>}
       className={classes.ticketContainer}
       bordered={true}
     >

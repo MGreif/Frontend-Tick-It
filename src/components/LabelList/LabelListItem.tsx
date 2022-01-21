@@ -29,7 +29,7 @@ const LabelListItem = ({ labelData }: IlabelListItemProps) => {
             title="Delete Label"
             content={() => <div>Are you sure, that you want to delete this label?</div>}
             actions={[{ label: "Delete", function: () => deleteLabel(labelData._id), buttonProps: { style: { color: "red", borderColor: "red" } } }]}
-            buttonProps={{ type: "dashed", className: classes.deleteButton, size: "middle" }}
+            buttonProps={{ type: "dashed", className: classes.deleteButton, size: "large", shape: "circle" }}
           />
         </div>
       </div>

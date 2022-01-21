@@ -1,0 +1,8 @@
+.content {
+  background-color: white;
+  padding: 1em;
+}
+
+.content > h1 {
+  font-size: 1.5em;
+}
