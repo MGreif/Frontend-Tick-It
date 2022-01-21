@@ -36,10 +36,10 @@ const Ticket = ({ ticketData }: ITicketProps) => {
       <div style={{position: "relative", paddingBottom: "1.3em"}}>
         <div className={classes.labelContainer}>
           {
-            ticketData.labels.map(label => <Label labelData={label}/>)
+            ticketData.labels.map(label => <Label labelData={label} key={label._id}/>)
           }
         </div>
-        <span className={classes.weight}>weight: {ticketData.weight}</span>
+        {ticketData.weight && <span className={classes.weight}>weight: {ticketData.weight}</span>}
         {ticketData.dateDue && <span className={classes.dueDate}>Due: {formatTime(ticketData.dateDue)}</span> }
       </div>
       {
