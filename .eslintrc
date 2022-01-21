@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "parser": "@typescript-eslint/parser",
+
+  "env": {
+      "es6": true,
+      "commonjs": true,
+      "browser": true,
+      "node": true
+  },
+  "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "eslint:recommended",
+      "prettier"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "space-before-function-paren": ["error", "always"]
+  },
+  "ignorePatterns": ["./**/*.test.ts", "./build"]
+}
