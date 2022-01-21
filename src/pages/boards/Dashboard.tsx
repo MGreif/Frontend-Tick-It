@@ -8,11 +8,11 @@ import BoardListActionBar from '../../components/BoardListActionBar'
 import SubBoardList from '../../components/SubBoardList'
 
 const BoardDashboard = () => {
-  const [board, setBoard] = useState<IBoard | null>(null)
   const activeProject: IProjectState | null = useSelector<
-    IRootState,
-    IProjectState | null
+  IRootState,
+  IProjectState | null
   >((state) => state.activeProject)
+  const [board, setBoard] = useState<IBoard | null>(activeProject?.boards[0] || null)
 
   useEffect(() => {
     const updatedBoard: IBoard | undefined = activeProject?.boards.find(

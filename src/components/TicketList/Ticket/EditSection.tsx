@@ -1,74 +1,47 @@
 import {
-  CheckOutlined,
-  CloseOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons'
-import { Button, DatePicker, Divider, InputNumber, Form } from 'antd'
-import React, { useState } from 'react'
+import {  DatePicker, InputNumber, Form } from 'antd'
+import { useForm } from 'antd/lib/form/Form'
+import React from 'react'
 import { ITicket } from '../../../pages/tickets/types'
+import LabelSelect from '../../LabelSelect'
 import classes from './EditSection.module.css'
-import { useUpdateTicket } from '../../../hooks/tickets/useUpdateTicket'
 
 interface IEditSectionProps {
-  hideEditSection: Function
-  ticketData: ITicket
+  ticketData: ITicket,
+  setInnerState: any,
+  innerState: any,
+  initialValues: any
 }
 
-const EditSection = ({ hideEditSection, ticketData }: IEditSectionProps) => {
-  const updateTicket = useUpdateTicket()
-  const [updateState, setUpdateState] = useState({})
-
-  const handleClose = () => {
-    hideEditSection()
-  }
-
-  const handleSave = () => {
-    updateTicket(ticketData._id, updateState)
-    hideEditSection()
-  }
-
+const EditSection = ({ ticketData, setInnerState, innerState }: IEditSectionProps) => {
+  const [form] = useForm()
   const handleChange = (target: string, value: any) => {
-    setUpdateState({ ...updateState, [target]: value })
+    setInnerState({ ...innerState, [target]: value })
   }
 
   return (
-    <React.Fragment>
-      <Divider />
-      <div className={classes.container}>
-        <Form.Item label="Due Date" name="dateDue">
+    <Form form={form} layout='vertical'>
+      <Form.Item>
+        <Form.Item label="Due Date" name="dateDue" className={classes.doubleItem}>
           <DatePicker
-            style={{ width: '100%' }}
             placeholder={ticketData.dateDue && ticketData.dateDue.toString()}
             onChange={(value) => handleChange('dateDue', value)}
-          />
+            />
         </Form.Item>
-        <Form.Item label="Weight" name="weight" className={classes.weightInput}>
+        <Form.Item label="Weight" name="weight" className={classes.doubleItem}>
           <InputNumber
             addonBefore={<ExclamationCircleOutlined />}
             placeholder={`${ticketData.weight}`}
             onChange={(value) => handleChange('weight', value)}
-          />
+            />
         </Form.Item>
-        <div className={classes.buttonContainer}>
-          <Button
-            shape="circle"
-            size="small"
-            type="dashed"
-            icon={<CheckOutlined />}
-            onClick={() => handleSave()}
-            className={classes.iconButton}
-          />
-          <Button
-            shape="circle"
-            size="small"
-            type="dashed"
-            icon={<CloseOutlined />}
-            onClick={() => handleClose()}
-            className={classes.iconButton}
-          />
-        </div>
-      </div>
-    </React.Fragment>
+      </Form.Item>
+      <Form.Item label="Labels" name="labels" >
+        <LabelSelect selectedLabels={ticketData.labels} onChange={(values: any) => handleChange('labels', values)}/>
+      </Form.Item>
+    </Form>
   )
 }
 

@@ -1,10 +1,9 @@
 import { Card } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import { ITicket } from '../../../pages/tickets/types'
 import classes from './index.module.css'
 import Label from '../../Label'
 import CardTitle from './CardTitle'
-import EditSection from './EditSection'
 
 interface ITicketProps {
   ticketData: ITicket
@@ -21,15 +20,10 @@ const formatTime = (_date: Date) => {
 }
 
 const Ticket = ({ ticketData }: ITicketProps) => {
-  const [clicked, setClicked] = useState<boolean>(false)
-
-  const handleClick = () => {
-    setClicked(true)
-  }
 
   return (
     <Card
-      title={<CardTitle onClick={handleClick} title={ticketData.title} _id={ticketData._id}/>}
+      title={<CardTitle ticket={ticketData}/>}
       className={classes.ticketContainer}
       bordered={true}
     >
@@ -42,9 +36,6 @@ const Ticket = ({ ticketData }: ITicketProps) => {
         {ticketData.weight && <span className={classes.weight}>weight: {ticketData.weight}</span>}
         {ticketData.dateDue && <span className={classes.dueDate}>Due: {formatTime(ticketData.dateDue)}</span> }
       </div>
-      {
-        clicked && <EditSection hideEditSection={() => setClicked(false)} ticketData={ticketData}/>
-      }
     </Card>
   )
 }

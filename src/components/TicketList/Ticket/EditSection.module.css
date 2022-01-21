@@ -24,3 +24,12 @@
 .weightInput {
   width: 130px;
 }
+
+.doubleItem {
+  display: inline-block;
+  width: calc(50% - 8px) 
+}
+
+.labelSelection {
+  width: 100%;
+}
