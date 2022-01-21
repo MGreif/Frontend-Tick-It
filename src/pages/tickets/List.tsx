@@ -8,7 +8,7 @@ import { IRootState } from '../../redux/project.reducer'
 import { useFetchProjectData } from '../../hooks/projects/useFetchProjectData'
 
 const List = () => {
-  const projectId: String | undefined = useSelector<IRootState, String | undefined>(state => state.activeProject?._id)
+  const projectId: string | undefined = useSelector<IRootState, string | undefined>(state => state.activeProject?._id)
   useFetchProjectData(projectId)
 
   return (

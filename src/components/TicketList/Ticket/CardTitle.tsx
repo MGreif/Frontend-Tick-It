@@ -4,7 +4,7 @@ import React from 'react'
 import classes from './CardTitle.module.css'
 
 interface ICardTitleProps {
-  title: String,
+  title: string,
   onClick: Function
 }
 

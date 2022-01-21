@@ -18,7 +18,8 @@
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "space-before-function-paren": ["error", "always"]
+    "@typescript-eslint/ban-types": "off",
+    "no-case-declarations": "off"
   },
   "ignorePatterns": ["./**/*.test.ts", "./build"]
 }

@@ -7,14 +7,14 @@ export const useFetchProjectsByUserId = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     if (!userId) return
-    const func = async function() {
+    const func = async function () {
       await fetchAllProjectsByUserId(dispatch, userId)
     }
     func()
   }, [userId, dispatch])
 }
 
-async function fetchAllProjectsByUserId(dispatch, projectId) {
+async function fetchAllProjectsByUserId (dispatch, projectId) {
   dispatch(fetchRequest())
   try {
     const { body } = await projectGateway.fetchAllProjectsByUserId(projectId)

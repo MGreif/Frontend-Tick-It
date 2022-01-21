@@ -1,5 +1,5 @@
 import { Divider } from 'antd'
-import { Form, Input } from 'antd';
+import { Form, Input } from 'antd'
 import React from 'react'
 import classes from './Create.module.css'
 
@@ -7,7 +7,7 @@ interface ICreateBoardProps {
   match: any
 }
 
-const CreateBoard = (props: ICreateBoardProps) => {
+const CreateBoard = (_props: ICreateBoardProps) => {
   return (
     <React.Fragment>
       <h1 className={classes.title}>Create New Board</h1>
