@@ -13,7 +13,7 @@ interface ICardTitleProps {
 const CardTitle = ({ onClick, title, _id }: ICardTitleProps) => {
   return (
     <div className={classes.container}>
-      <span><Link to={`/tickets/${_id}`}>{title}</Link></span>
+      <span><Link to={{ pathname: `/tickets/${_id}`, state: { callee: 'board' }}}>{title}</Link></span>
       <Button shape="circle" type="dashed" icon={<SettingOutlined />} onClick={() => onClick()} className={classes.iconButton}/>
     </div>
   )

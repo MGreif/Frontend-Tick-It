@@ -16,7 +16,6 @@ interface ITicketDetailProps {
 }
 
 const TicketDetails = ({ ticketData }: ITicketDetailProps) => {
-  console.log(ticketData.description)
   return (
     <div className={classes.content}>
       <h1>{ticketData.title}</h1>

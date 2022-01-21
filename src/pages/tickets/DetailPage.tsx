@@ -1,13 +1,14 @@
 import { Breadcrumb, Col, PageHeader, Row } from 'antd'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import TicketDetails from '../../components/TicketDetails'
 import { useGetDetailedTicket } from '../../hooks/tickets/useGetDetailedTicket'
 import classes from './DetailPage.module.css'
 
 const DetailPage = () => {
-
+  const location = useLocation()
+  const state: any = location.state
   const { ticketId }: any = useParams()
   const { ticket, fetchTicket }: any = useGetDetailedTicket()
 
@@ -22,7 +23,13 @@ const DetailPage = () => {
       <PageHeader
         title="Ticket Details"
         breadcrumb={<Breadcrumb separator=">">
-          <Breadcrumb.Item ><Link to={'/projects'}>Boards</Link></Breadcrumb.Item>
+          <Breadcrumb.Item >
+          {
+            state.callee === 'board' ?
+              <Link to={'/projects'}>Boards</Link> :
+              <Link to={'/tickets'}>Tickets</Link>
+          }
+          </Breadcrumb.Item>
           <Breadcrumb.Item >Ticket Details</Breadcrumb.Item>
         </Breadcrumb>}
       />
