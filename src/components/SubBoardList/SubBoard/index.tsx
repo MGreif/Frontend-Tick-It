@@ -7,15 +7,17 @@ import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSu
 import CardTitle from './CardTitle';
 import classes from './index.module.css'
 import { IRootState } from '../../../redux/project.reducer';
+import { ITicket } from '../../../pages/tickets/types';
 
 interface ISubBoardProps {
   subBoardData: ISubBoard,
+  showClosed?: boolean
 }
 
-const SubBoard = ({ subBoardData }: ISubBoardProps) => {
+const SubBoard = ({ subBoardData, showClosed = false }: ISubBoardProps) => {
 
-  const tickets: any = useSelector<IRootState>(state => state.activeProject?.tickets)
-  const correspondingTickets = findMatchingTicketsForSubBoard(tickets, subBoardData)
+  const tickets: ITicket[] | undefined = useSelector<IRootState, ITicket[] | undefined>(state => state.activeProject?.tickets) || []
+  const correspondingTickets = showClosed ? tickets?.filter(ticket => ticket.closed) : findMatchingTicketsForSubBoard(tickets, subBoardData)
   
   return (
     <div className={classes.board}>

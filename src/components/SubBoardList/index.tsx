@@ -18,6 +18,7 @@ const SubBoardList = ({ board }: ISubBoardListProps) => {
     {
       board.subBoards.map(subBoard => <SubBoard subBoardData={subBoard} key={subBoard.name} />)
     }
+    <SubBoard subBoardData={{name: 'Closed', filterCriteriaLabel: null, wipLimit: null, _id: '' }} showClosed={true} />
   </div>
   )
 }
