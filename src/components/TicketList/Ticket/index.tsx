@@ -1,13 +1,9 @@
 import { Card } from 'antd'
 import React from 'react'
-import { ITicket } from '../../../pages/tickets/types'
 import classes from './index.module.css'
 import Label from '../../Label'
 import CardTitle from './CardTitle'
-
-interface ITicketProps {
-  ticketData: ITicket
-}
+import _ from 'lodash'
 
 const formatTime = (_date: Date) => {
 
@@ -19,24 +15,25 @@ const formatTime = (_date: Date) => {
   return `${year}-${month}-${day}`
 }
 
-const Ticket = ({ ticketData }: ITicketProps) => {
-
-  return (
-    <Card
-      title={<CardTitle ticket={ticketData}/>}
-      className={classes.ticketContainer}
-      bordered={true}
-    >
-      <div style={{position: "relative", paddingBottom: "1.3em"}}>
-        <div className={classes.labelContainer}>
-          {
-            ticketData.labels.map(label => <Label labelData={label} key={label._id}/>)
-          }
+const Ticket = (props: any) => {
+  return _.flowRight(props.connectDragSource, props.connectDropTarget)(
+    <div>
+      <Card
+        title={props.ticketData && <CardTitle ticket={props.ticketData}/>}
+        className={classes.ticketContainer}
+        bordered={true}
+        >
+        <div style={{position: "relative", paddingBottom: "1.3em"}}>
+          <div className={classes.labelContainer}>
+            {
+              props.ticketData?.labels.map((label: any) => <Label labelData={label} key={label._id}/>)
+            }
+          </div>
+          {props.ticketData?.weight && <span className={classes.weight}>weight: {props.ticketData.weight}</span>}
+          {props.ticketData?.dateDue && <span className={classes.dueDate}>Due: {formatTime(props.ticketData.dateDue)}</span> }
         </div>
-        {ticketData.weight && <span className={classes.weight}>weight: {ticketData.weight}</span>}
-        {ticketData.dateDue && <span className={classes.dueDate}>Due: {formatTime(ticketData.dateDue)}</span> }
-      </div>
-    </Card>
+      </Card>
+    </div>
   )
 }
 

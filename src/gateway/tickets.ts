@@ -11,6 +11,14 @@ const createNewTicket: any = (ticketData: ITicket) => {
     .send(ticketData)
 }
 
+const moveTicket: any = (ticketId: string, subBoardId: string, index: number) => {
+
+  const url = baseUrl + '/tickets/' + ticketId + '/move'
+  return superagent
+    .patch(url)
+    .send({ subBoardId, index })
+}
+
 const updateTicket: any = (ticketId: string, ticketData: ITicket) => {
   if (!ticketId) return
 
@@ -32,4 +40,4 @@ const getDetailedTicket: any = (ticketId: string) => {
 
 
 
-export { createNewTicket, updateTicket, getDetailedTicket }
+export { createNewTicket, updateTicket, getDetailedTicket, moveTicket }
