@@ -1,7 +1,7 @@
 import { Card } from 'antd'
 import React from 'react'
 import classes from './index.module.css'
-import Label from '../../Label'
+import Label from '../Label'
 import CardTitle from './CardTitle'
 import _ from 'lodash'
 
@@ -17,10 +17,9 @@ const formatTime = (_date: Date) => {
 
 const Ticket = (props: any) => {
   return _.flowRight(props.connectDragSource, props.connectDropTarget)(
-    <div>
+    <div className={classes.ticketContainer}>
       <Card
         title={props.ticketData && <CardTitle ticket={props.ticketData}/>}
-        className={classes.ticketContainer}
         bordered={true}
         >
         <div style={{position: "relative", paddingBottom: "1.3em"}}>

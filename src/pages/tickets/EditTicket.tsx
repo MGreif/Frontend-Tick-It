@@ -5,9 +5,11 @@ import TicketForm from '../../components/TicketForm'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { useUpdateTicket } from '../../hooks/tickets/useUpdateTicket'
 import { useGetDetailedTicket } from '../../hooks/tickets/useGetDetailedTicket'
+import { useDeleteTicket } from '../../hooks/tickets/useDeleteTicket'
 
 const EditTicket = () => {
   const updateTicket = useUpdateTicket()
+  const deleteTicket = useDeleteTicket()
   const { ticket, fetchTicket }: any = useGetDetailedTicket()
   const { ticketId }: any = useParams()
   const history = useHistory()
@@ -24,7 +26,7 @@ const EditTicket = () => {
       buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }
     },
     { onClick: () => {
-      updateTicket(ticketId, { closed: !ticket.closed}).then(() => history.push('/tickets/' + ticketId))
+      deleteTicket(ticketId).then(() => history.push('/tickets'))
     },
     label: 'Delete Ticket ',
     buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }

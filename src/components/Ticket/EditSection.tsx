@@ -5,9 +5,9 @@ import {  DatePicker, InputNumber, Form, Cascader } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { ITicket } from '../../../pages/tickets/types'
-import { IProjectState, IRootState } from '../../../redux/project.reducer'
-import LabelSelect from '../../LabelSelect'
+import { ITicket } from '../../pages/tickets/types'
+import { IProjectState, IRootState } from '../../redux/project.reducer'
+import LabelSelect from '../LabelSelect'
 import classes from './EditSection.module.css'
 
 interface IEditSectionProps {

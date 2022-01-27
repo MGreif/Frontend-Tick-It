@@ -37,7 +37,15 @@ const getDetailedTicket: any = (ticketId: string) => {
     .get(url)
 }
 
+const deleteTicket: any = (ticketId: string) => {
+  if (!ticketId) return
+
+  const url = baseUrl + '/tickets/' + ticketId
+
+  return superagent
+    .delete(url)
+}
 
 
 
-export { createNewTicket, updateTicket, getDetailedTicket, moveTicket }
+export { createNewTicket, updateTicket, getDetailedTicket, moveTicket, deleteTicket }

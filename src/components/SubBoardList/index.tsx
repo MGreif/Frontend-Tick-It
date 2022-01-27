@@ -14,7 +14,6 @@ interface ISubBoardListProps {
 }
 
 const SubBoardList = ({ board }: ISubBoardListProps) => {
- // const activeProject: any = useSelector<any,any>(state=> state.activeProject)
   const moveTicketDrop = useMoveTicket()
   const projectId: string | undefined = useSelector<IRootState, string | undefined>(state => state.activeProject?._id)
   const dispatch = useDispatch()

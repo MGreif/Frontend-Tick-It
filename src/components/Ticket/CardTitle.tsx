@@ -1,9 +1,9 @@
 import { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useUpdateTicket } from '../../../hooks/tickets/useUpdateTicket'
-import { ITicket } from '../../../pages/tickets/types'
-import GenericDrawer, { IGenericDrawerProps } from '../../GenericDrawer'
+import { useUpdateTicket } from '../../hooks/tickets/useUpdateTicket'
+import { ITicket } from '../../pages/tickets/types'
+import GenericDrawer, { IGenericDrawerProps } from '../GenericDrawer'
 import classes from './CardTitle.module.css'
 import EditSection from './EditSection'
 

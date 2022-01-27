@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'antd'
 import { ISubBoard } from '../../types';
-import Ticket from '../../TicketList/Ticket';
+import Ticket from '../../Ticket';
 import { useSelector } from 'react-redux';
 import { findMatchingTicketsForSubBoard } from './helper/findMatchingTicketForSubBoard';
 import CardTitle from './CardTitle';
