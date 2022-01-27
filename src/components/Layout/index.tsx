@@ -13,6 +13,7 @@ import Header from './Header';
 import CreateTicket from '../../pages/tickets/CreateTicket';
 import CreateLabel from '../../pages/labels/CreateLabel';
 import TicketDetailPage from '../../pages/tickets/DetailPage';
+import EditTicket from '../../pages/tickets/EditTicket';
 
 const { Content, Footer, Sider } = AntdLayout
 
@@ -44,6 +45,7 @@ function Layout() {
               ROUTE_CONFIGURATION.map(config => <Route key={config.title} path={'/' + config.path} component={config.component} exact/>
               )}
             <Route path="/tickets/create" component={CreateTicket as any}/>
+            <Route path="/tickets/edit/:ticketId" component={EditTicket as any}/>
             <Route path="/tickets/:ticketId" component={TicketDetailPage as any}/>
             <Route path="/labels/create" component={CreateLabel as any}/>
             <Route path="/" component={() => <span>Home</span>} />
