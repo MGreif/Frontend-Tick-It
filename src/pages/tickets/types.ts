@@ -1,3 +1,4 @@
+import { ISubBoard } from "../../components/types";
 import { ILabel } from "../labels/types";
 import { IUser } from "../users/types";
 
@@ -13,6 +14,7 @@ export interface ITicket {
     assignee: string,
     labels: ILabel[],
     relatedTickets: ITicket[],
+    allocatedSubBoard: ISubBoard,
     project: string,
     closed: boolean
   }

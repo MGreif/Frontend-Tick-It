@@ -2,12 +2,12 @@ import React from 'react'
 import { Breadcrumb, Col, PageHeader, Row } from 'antd'
 import classes from './List.module.css'
 import TicketForm from '../../components/TicketForm'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useCreateNewTicket } from '../../hooks/tickets/useCreateNewTicket'
 
-const CreateTicket = ({ history }: any) => {
+const CreateTicket = () => {
   const createNewTicket = useCreateNewTicket()
-
+  const history = useHistory()
   const formButtons = [
     { onClick: (data: any) => { createNewTicket(data).then(() => history.push('/tickets')) }, label: 'Submit' }
   ]

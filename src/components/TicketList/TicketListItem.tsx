@@ -18,7 +18,7 @@ const TicketListItem = ({ ticketData }: ITicketListItemProps) => {
     <Card className={classes.card}>
       <div className={classes.container}>
         <span>
-        <Link to={{ pathname: `/tickets/${ticketData._id}`, state: { callee: 'ticketlist' }}}>{ticketData.title}</Link>
+        <Link to={{ pathname: `/tickets/${ticketData._id}`, state: { callee: 'ticketlist' }}}>{ticketData.title}{ticketData.closed && <em> (closed)</em>}</Link>
           <span className={classes.labelContainer}>{ticketData.labels.map(label => <Label labelData={label} key={label._id} />)}</span>
         </span>
         <span>{getRelativeTime(new Date(ticketData.createdAt))}</span>

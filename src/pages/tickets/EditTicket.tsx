@@ -22,7 +22,13 @@ const EditTicket = () => {
       },
       label: ticket.closed ? 'Re-open Ticket' : 'Close Ticket',
       buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }
-    }
+    },
+    { onClick: () => {
+      updateTicket(ticketId, { closed: !ticket.closed}).then(() => history.push('/tickets/' + ticketId))
+    },
+    label: 'Delete Ticket ',
+    buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }
+  }
   ]
   return (
     <div className={classes.listContainer}>

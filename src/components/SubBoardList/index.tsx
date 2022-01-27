@@ -15,10 +15,11 @@ const SubBoardList = ({ board }: ISubBoardListProps) => {
 
   return (
     <div className={classes.boardsContainer}>
-    {
-      board.subBoards.map(subBoard => <SubBoard subBoardData={subBoard} key={subBoard.name} />)
-    }
-    <SubBoard subBoardData={{name: 'Closed', filterCriteriaLabel: null, wipLimit: null, _id: '' }} showClosed={true} />
+      <SubBoard subBoardData={{name: 'Backlog', filterCriteriaLabel: null, wipLimit: null, _id: '' }} isBacklog={true} />
+      {
+        board.subBoards.map(subBoard => <SubBoard subBoardData={subBoard} key={subBoard.name} />)
+      }
+      <SubBoard subBoardData={{name: 'Closed', filterCriteriaLabel: null, wipLimit: null, _id: '' }} showClosed={true} />
   </div>
   )
 }

@@ -20,7 +20,7 @@ const TicketDetails = ({ ticketData }: ITicketDetailProps) => {
   return (
     <div className={classes.content}>
       <div className={classes['flex-container-space-between']}>
-        <h1>{ticketData.title}</h1>
+        <h1>{ticketData.title}{ticketData.closed && <em> (closed)</em>}</h1>
         <Button type='primary'><Link to={'/tickets/edit/' + ticketData?._id} >Edit Ticket</Link></Button>
       </div>
       <Divider orientation="left">Description</Divider>

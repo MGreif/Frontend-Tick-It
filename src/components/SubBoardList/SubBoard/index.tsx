@@ -11,13 +11,16 @@ import { ITicket } from '../../../pages/tickets/types';
 
 interface ISubBoardProps {
   subBoardData: ISubBoard,
-  showClosed?: boolean
+  showClosed?: boolean,
+  isBacklog?: boolean
 }
 
-const SubBoard = ({ subBoardData, showClosed = false }: ISubBoardProps) => {
+const SubBoard = ({ subBoardData, showClosed, isBacklog }: ISubBoardProps) => {
 
   const tickets: ITicket[] | undefined = useSelector<IRootState, ITicket[] | undefined>(state => state.activeProject?.tickets) || []
-  const correspondingTickets = showClosed ? tickets?.filter(ticket => ticket.closed) : findMatchingTicketsForSubBoard(tickets, subBoardData)
+  const correspondingTickets = showClosed ? 
+    tickets.filter(ticket => ticket.closed) :
+    isBacklog ? tickets.filter(ticket => { return !ticket.allocatedSubBoard && (showClosed ? ticket : ticket.closed === false)}) : findMatchingTicketsForSubBoard(tickets.filter(ticket => ticket.closed === false), subBoardData)
   
   return (
     <div className={classes.board}>
