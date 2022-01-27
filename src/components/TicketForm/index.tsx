@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Form,
   Input,
@@ -7,54 +7,52 @@ import {
   DatePicker,
   AutoComplete,
   Select,
+  ButtonProps,
 } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import classes from './index.module.css'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import Label from '../Label'
-import { useCreateNewTicket } from '../../hooks/tickets/useCreateNewTicket'
 import { IUser } from '../../pages/users/types'
+import { ITicket } from '../../pages/tickets/types'
+import moment from 'moment'
 
 const { TextArea } = Input
 const { Option } = Select
 
 interface ITicketFormProps {
-  history: any
+  actionButtons: { label: string, onClick: any, buttonProps?: ButtonProps }[]
+  initialData?: ITicket & { assignee: IUser} | undefined
 }
 
-const TicketForm = ({ history }: ITicketFormProps) => {
+const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
   const [form] = Form.useForm()
   const activeProject = useSelector<IRootState, IProjectState | null>(
     (state) => state.activeProject
   )
   const loggedInUser = useSelector<IRootState, IUser | undefined>(state => state.authentication?.user)
-  const createNewTicket = useCreateNewTicket()
 
-  const handleFinish = (fieldsValue: any) => {
-    const data = {
-      ...fieldsValue,
-      createdBy: loggedInUser?._id, //TODO
-      relatedTickets: [], // TODO
-      project: activeProject?._id,
-      closed: false,
-    }
-
-    createNewTicket(data).then(() => history.push('/tickets'))
-  }
-
+  useEffect(() => {
+    form.setFieldsValue({
+      ...initialData,
+      assignee: initialData?.assignee?._id,
+      labels: initialData?.labels?.map(label => label._id),
+      dateDue: initialData?.dateDue ? moment(initialData.dateDue) : null
+    })
+  }, [initialData])
   if (!activeProject) return null
 
   return (
     <div>
-      <Form layout="vertical" form={form} onFinish={handleFinish}>
+      <Form layout="vertical" form={form}>
         <Form.Item
           label="Title"
           rules={[{ required: true, message: 'Please input a title' }]}
           name="title">
           <Input placeholder="Sample Ticket" />
         </Form.Item>
-        <Form.Item label="Description" name="description" initialValue="">
+        <Form.Item label="Description" name="description">
           <TextArea
             onChange={e => form.setFieldsValue({[e.target.name]: e.target.innerHTML})}
             placeholder="This is a sample ticket"
@@ -83,6 +81,7 @@ const TicketForm = ({ history }: ITicketFormProps) => {
             name="assignee"
             className={classes.tripleItem}>
             <AutoComplete
+              defaultValue={form.getFieldValue('assignee')}
               options={activeProject?.members.map((member) => ({
                 value: member._id,
                 label: member.name,
@@ -97,6 +96,7 @@ const TicketForm = ({ history }: ITicketFormProps) => {
             mode="multiple"
             allowClear
             style={{ width: '100%' }}
+            defaultValue={form.getFieldValue('labels')}
             placeholder="Please Select the corresponding labels">
             {activeProject.labels.map((label) => (
               <Option value={label._id} title={label.name} key={label._id}>
@@ -106,9 +106,19 @@ const TicketForm = ({ history }: ITicketFormProps) => {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          {
+            actionButtons.map(button => {
+              return <Button type="primary" onClick={() => button.onClick({
+                ...form.getFieldsValue(),
+                createdBy: loggedInUser?._id,
+                relatedTickets: [], // TODO
+                project: activeProject?._id,
+                closed: false,
+              })} {...(button.buttonProps || {})}>
+                {button.label}
+              </Button>
+            })
+          }
         </Form.Item>
       </Form>
     </div>

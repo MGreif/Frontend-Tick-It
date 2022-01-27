@@ -3,11 +3,7 @@ import { Form, Input } from 'antd'
 import React from 'react'
 import classes from './Create.module.css'
 
-interface ICreateBoardProps {
-  match: any
-}
-
-const CreateBoard = (_props: ICreateBoardProps) => {
+const CreateBoard = () => {
   return (
     <React.Fragment>
       <h1 className={classes.title}>Create New Board</h1>

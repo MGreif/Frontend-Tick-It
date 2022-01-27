@@ -1,9 +1,10 @@
-import { Col, Divider, Row } from 'antd'
+import { Button, Col, Divider, Row } from 'antd'
 import React from 'react'
 import { ITicket } from '../../pages/tickets/types'
 import classes from './index.module.css'
 import RelatedTicketsSection from './RelatedTicketsSection'
 import markdown_it from 'markdown-it'
+import { Link } from 'react-router-dom'
 
 const md = new markdown_it({
   html: false,
@@ -18,7 +19,10 @@ interface ITicketDetailProps {
 const TicketDetails = ({ ticketData }: ITicketDetailProps) => {
   return (
     <div className={classes.content}>
-      <h1>{ticketData.title}</h1>
+      <div className={classes['flex-container-space-between']}>
+        <h1>{ticketData.title}</h1>
+        <Button type='primary'><Link to={'/tickets/edit/' + ticketData?._id} >Edit Ticket</Link></Button>
+      </div>
       <Divider orientation="left">Description</Divider>
       <p dangerouslySetInnerHTML={{__html: md.render(ticketData.description || '')}}></p>
       {ticketData.relatedTickets?.length > 0 && <RelatedTicketsSection relatedTickets={ticketData.relatedTickets}/>}

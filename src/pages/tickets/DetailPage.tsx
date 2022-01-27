@@ -25,12 +25,12 @@ const DetailPage = () => {
         breadcrumb={<Breadcrumb separator=">">
           <Breadcrumb.Item >
           {
-            state.callee === 'board' ?
+            state?.callee === 'board' ?
               <Link to={'/projects'}>Boards</Link> :
               <Link to={'/tickets'}>Tickets</Link>
           }
           </Breadcrumb.Item>
-          <Breadcrumb.Item >Ticket Details</Breadcrumb.Item>
+          <Breadcrumb.Item>{ticket.title}</Breadcrumb.Item>
         </Breadcrumb>}
       />
       <Row gutter={[16, 16]} className={classes.listRow}>
