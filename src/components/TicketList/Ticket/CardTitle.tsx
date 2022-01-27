@@ -15,6 +15,7 @@ const CardTitle = ({ ticket }: ICardTitleProps) => {
   const updateTicket = useUpdateTicket()
 
   const actions : IGenericDrawerProps["actions"] = [
+    { function: () => updateTicket(ticket._id, {closed: !ticket.closed}), label: ticket.closed ? "Re-open Ticket" : "Close Ticket", buttonProps: {style: { marginLeft: '1em'}, type: 'default'}},
     { function: (innerState: any) => updateTicket(ticket._id, innerState), label: "Save", buttonProps: {style: { marginLeft: '1em'}, type: 'primary'}}
   ]
 
@@ -22,14 +23,13 @@ const CardTitle = ({ ticket }: ICardTitleProps) => {
     <div className={classes.container}>
       <span><Link to={{ pathname: `/tickets/${ticket._id}`, state: { callee: 'board' }}}>{ticket.title}</Link></span>
       <GenericDrawer
-        buttonLabel={''}
         buttonProps={{
           shape: 'circle',
           type:'dashed',
           icon:<SettingOutlined />,
           className: classes.iconButton}
         }
-        content={(props) => <EditSection ticketData={ticket} {...props} />} title='test' actions={actions}/>
+        content={(props) => <EditSection ticketData={ticket} {...props} />} title={ticket.title} actions={actions}/>
     </div>
   )
 }

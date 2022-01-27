@@ -6,8 +6,8 @@ import classes from './GenericDrawer.module.css'
 export interface IGenericDrawerProps {
   title: string
   content: React.FC<{ setInnerState: any; innerState: any; initialValues: any }>
-  actions: [{ label: string; function: Function; buttonProps?: ButtonProps }]
-  buttonLabel: any
+  actions: { label: string; function: Function; buttonProps?: ButtonProps }[]
+  buttonLabel?: any
   buttonClass?: any
   buttonProps?: ButtonProps
 }
