@@ -24,9 +24,10 @@ const TicketDetails = ({ ticketData }: ITicketDetailProps) => {
       {ticketData.relatedTickets?.length > 0 && <RelatedTicketsSection relatedTickets={ticketData.relatedTickets}/>}
       <Divider orientation="left">Meta-Details</Divider>
       <Row gutter={[16, 16]} className={classes.listRow}>
-        <Col span={8}>a</Col>
-        <Col span={8}>b</Col>
-        <Col span={8}>c</Col>
+        <Col span={8}>Weight: {ticketData.weight}</Col>
+        <Col span={8}>Due: {new Date(ticketData.dateDue).toDateString()}</Col>
+        <Col span={8}>Last update: {new Date(ticketData.updatedAt).toDateString()}</Col>
+        <Col span={8}>Created By: {ticketData.createdBy?.username}</Col>
       </Row>
     </div>
   ) 

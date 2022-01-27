@@ -19,18 +19,34 @@ export interface IProjectState {
 export interface IRootState {
   projects: []
   activeProject: IProjectState | null
+  authentication: null | {
+    user: IUser
+  }
   isFetching: boolean
   error: any
 }
 
-const initialState: IRootState = {
+const dummyUser = {
+  name: "mika",
+  password: "$2b$12$T9NW2RCbymWuRgNsM7CS4.yav9u7HL0KESGN9tyy1h90alMr3B3fa",
+  profilePicture: "/mika",
+  roles: [],
+  surname: "surMika",
+  username: "MikolasCage",
+  _id: "61ac087a5ea297b9314cf278"
+}
+
+export const initialState: IRootState = {
   projects: [],
   activeProject: null,
+  authentication: {
+    user: dummyUser
+  },
   isFetching: false,
   error: null,
 }
 
-function projectReducer(
+function projectReducer (
   state: IRootState = initialState,
   action: { type: string; payload: any }
 ) {

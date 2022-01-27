@@ -14,6 +14,7 @@ import classes from './index.module.css'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import Label from '../Label'
 import { useCreateNewTicket } from '../../hooks/tickets/useCreateNewTicket'
+import { IUser } from '../../pages/users/types'
 
 const { TextArea } = Input
 const { Option } = Select
@@ -27,12 +28,13 @@ const TicketForm = ({ history }: ITicketFormProps) => {
   const activeProject = useSelector<IRootState, IProjectState | null>(
     (state) => state.activeProject
   )
+  const loggedInUser = useSelector<IRootState, IUser | undefined>(state => state.authentication?.user)
   const createNewTicket = useCreateNewTicket()
 
   const handleFinish = (fieldsValue: any) => {
     const data = {
       ...fieldsValue,
-      createdBy: '61ac087a5ea297b9314cf278', //TODO
+      createdBy: loggedInUser?._id, //TODO
       relatedTickets: [], // TODO
       project: activeProject?._id,
       closed: false,

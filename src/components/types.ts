@@ -1,6 +1,6 @@
 export interface ISubBoard {
   _id: string,
-  filterCriteriaLabel: string,
+  filterCriteriaLabel: string | null,
   name: string,
-  wipLimit: number
+  wipLimit: number | null
 }
