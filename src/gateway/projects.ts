@@ -1,9 +1,10 @@
 import superagent from 'superagent'
+import { IProject } from '../types/Project.types'
 
 const baseUrl = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`
 
-const fetchAllProjectsByUserId: any = () => {
-  const url = baseUrl + '/projects/by-user/61ac08cd2a068d56f280c259'
+const fetchAllProjectsByUserId: any = (userId: string) => {
+  const url = baseUrl + '/projects/by-user/' + userId
   return superagent.get(url)
 }
 
@@ -12,4 +13,10 @@ const fetchProjectData: any = (projectId: string) => {
   return superagent.get(url)
 }
 
-export { fetchAllProjectsByUserId, fetchProjectData }
+const createProject: any = (projectData: Partial<IProject>) => {
+  const url = baseUrl + '/projects/'
+  console.log(url, projectData)
+  return superagent.post(url).send(projectData)
+}
+
+export { fetchAllProjectsByUserId, fetchProjectData, createProject }

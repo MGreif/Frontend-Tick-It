@@ -22,8 +22,8 @@ const { TextArea } = Input
 const { Option } = Select
 
 interface ITicketFormProps {
-  actionButtons: { label: string, onClick: any, buttonProps?: ButtonProps }[]
-  initialData?: ITicket & { assignee: IUser} | undefined
+  actionButtons: { label: string; onClick: any; buttonProps?: ButtonProps }[]
+  initialData?: (ITicket & { assignee: IUser }) | undefined
 }
 
 const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
@@ -31,14 +31,16 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
   const activeProject = useSelector<IRootState, IProjectState | null>(
     (state) => state.activeProject
   )
-  const loggedInUser = useSelector<IRootState, IUser | undefined>(state => state.authentication?.user)
+  const loggedInUser = useSelector<IRootState, IUser | undefined>(
+    (state) => state.authentication?.user
+  )
 
   useEffect(() => {
     form.setFieldsValue({
       ...initialData,
       assignee: initialData?.assignee?._id,
-      labels: initialData?.labels?.map(label => label._id),
-      dateDue: initialData?.dateDue ? moment(initialData.dateDue) : null
+      labels: initialData?.labels?.map((label) => label._id),
+      dateDue: initialData?.dateDue ? moment(initialData.dateDue) : null,
     })
   }, [initialData])
   if (!activeProject) return null
@@ -49,12 +51,15 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
         <Form.Item
           label="Title"
           rules={[{ required: true, message: 'Please input a title' }]}
-          name="title">
+          name="title"
+        >
           <Input placeholder="Sample Ticket" />
         </Form.Item>
         <Form.Item label="Description" name="description">
           <TextArea
-            onChange={e => form.setFieldsValue({[e.target.name]: e.target.innerHTML})}
+            onChange={(e) =>
+              form.setFieldsValue({ [e.target.name]: e.target.innerHTML })
+            }
             placeholder="This is a sample ticket"
             rows={7}
             style={{ width: '100%' }}
@@ -64,7 +69,8 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
           <Form.Item
             label="Weight"
             name="weight"
-            className={classes.tripleItem}>
+            className={classes.tripleItem}
+          >
             <InputNumber
               addonBefore={<ExclamationCircleOutlined />}
               placeholder="4"
@@ -73,13 +79,15 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
           <Form.Item
             label="Due Date"
             name="dateDue"
-            className={classes.tripleItem}>
+            className={classes.tripleItem}
+          >
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item
             label="Assignee"
             name="assignee"
-            className={classes.tripleItem}>
+            className={classes.tripleItem}
+          >
             <AutoComplete
               defaultValue={form.getFieldValue('assignee')}
               options={activeProject?.members.map((member) => ({
@@ -97,7 +105,8 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
             allowClear
             style={{ width: '100%' }}
             defaultValue={form.getFieldValue('labels')}
-            placeholder="Please Select the corresponding labels">
+            placeholder="Please Select the corresponding labels"
+          >
             {activeProject.labels.map((label) => (
               <Option value={label._id} title={label.name} key={label._id}>
                 <Label labelData={label} />
@@ -106,19 +115,26 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
           </Select>
         </Form.Item>
         <Form.Item>
-          {
-            actionButtons.map(button => {
-              return <Button type="primary" onClick={() => button.onClick({
-                ...form.getFieldsValue(),
-                createdBy: loggedInUser?._id,
-                relatedTickets: [], // TODO
-                project: activeProject?._id,
-                closed: false,
-              })} {...(button.buttonProps || {})}>
+          {actionButtons.map((button) => {
+            return (
+              <Button
+                type="primary"
+                key={button.label}
+                onClick={() =>
+                  button.onClick({
+                    ...form.getFieldsValue(),
+                    createdBy: loggedInUser?._id,
+                    relatedTickets: [], // TODO
+                    project: activeProject?._id,
+                    closed: false,
+                  })
+                }
+                {...(button.buttonProps || {})}
+              >
                 {button.label}
               </Button>
-            })
-          }
+            )
+          })}
         </Form.Item>
       </Form>
     </div>
