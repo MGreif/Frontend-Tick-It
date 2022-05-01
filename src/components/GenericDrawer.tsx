@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { createRef, useImperativeHandle, useState } from 'react'
 import { Button, Drawer, Divider } from 'antd'
 import { ButtonProps } from 'antd/lib/button'
 import classes from './GenericDrawer.module.css'
@@ -12,50 +12,51 @@ export interface IGenericDrawerProps {
   buttonProps?: ButtonProps
 }
 
-const GenericDrawer = (config: IGenericDrawerProps) => {
-  const [visible, setVisibility] = useState(false)
-  const [innerState, setInnerState] = useState({})
+const GenericDrawer: React.FC<IGenericDrawerProps & { ref: any }> =
+  React.forwardRef((config, ref) => {
+    const [visible, setVisibility] = useState(false)
+    const [innerState, setInnerState] = useState({})
 
-  const showDrawer = () => {
-    setVisibility(true)
-  }
+    useImperativeHandle(ref, () => ({
+      toggleVisibility: (value: boolean) => {
+        setVisibility(value)
+      },
+      getVisibility: () => visible,
+    }))
 
-  const handleClose = () => {
-    setVisibility(false)
-    setInnerState({})
-  }
+    const handleClose = () => {
+      setVisibility(false)
+      setInnerState({})
+    }
 
-  const Header = () => {
+    const Header = () => {
+      return (
+        <React.Fragment>
+          <div className={classes.headerContainer}>
+            {config.actions.map((action) => (
+              <Button
+                key={action.label}
+                onClick={() => {
+                  action.function(innerState)
+                  handleClose()
+                }}
+                {...(action.buttonProps || {})}
+              >
+                {action.label}
+              </Button>
+            ))}
+          </div>
+          <Divider />
+        </React.Fragment>
+      )
+    }
     return (
-      <React.Fragment>
-        <div className={classes.headerContainer}>
-          {config.actions.map((action) => (
-            <Button
-              key={action.label}
-              onClick={() => {
-                action.function(innerState)
-                handleClose()
-              }}
-              {...(action.buttonProps || {})}>
-              {action.label}
-            </Button>
-          ))}
-        </div>
-        <Divider />
-      </React.Fragment>
-    )
-  }
-
-  return (
-    <React.Fragment>
-      <Button
-        type="primary"
-        onClick={showDrawer}
-        className={config.buttonClass || ''}
-        {...(config.buttonProps || {})}>
-        {config.buttonLabel}
-      </Button>
-      <Drawer title={config.title} placement="right" onClose={handleClose} visible={visible}>
+      <Drawer
+        title={config.title}
+        placement="right"
+        onClose={handleClose}
+        visible={visible}
+      >
         <Header />
         <config.content
           setInnerState={(data: any) => setInnerState(data)}
@@ -63,8 +64,42 @@ const GenericDrawer = (config: IGenericDrawerProps) => {
           initialValues={innerState}
         />
       </Drawer>
+    )
+  })
+
+const ButtonDrawer = (config: IGenericDrawerProps) => {
+  const drawerRef: any = createRef()
+  return (
+    <React.Fragment>
+      <Button
+        type="primary"
+        onClick={drawerRef.current.toggleVisibility(
+          !!drawerRef.current.getVisibility()
+        )}
+        className={config.buttonClass || ''}
+        {...(config.buttonProps || {})}
+      >
+        {config.buttonLabel}
+      </Button>
+      <GenericDrawer {...config} ref={drawerRef} />
     </React.Fragment>
   )
 }
 
-export default GenericDrawer
+const DrawerWrapper = ({
+  children,
+  ...props
+}: IGenericDrawerProps & { children: any }) => {
+  const drawerRef: any = createRef()
+
+  return (
+    <>
+      <div onClick={() => drawerRef.current.toggleVisibility(true)}>
+        {children}
+      </div>
+      <GenericDrawer {...props} ref={drawerRef} />
+    </>
+  )
+}
+
+export { DrawerWrapper, ButtonDrawer }

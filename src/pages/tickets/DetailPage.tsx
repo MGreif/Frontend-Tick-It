@@ -1,5 +1,5 @@
 import { Breadcrumb, Col, PageHeader, Row } from 'antd'
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useParams, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import TicketDetails from '../../components/TicketDetails'
@@ -12,7 +12,7 @@ const DetailPage = () => {
   const { ticketId }: any = useParams()
   const { ticket, fetchTicket }: any = useGetDetailedTicket()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchTicket(ticketId)
   }, [ticketId, fetchTicket])
 
@@ -22,16 +22,18 @@ const DetailPage = () => {
     <div>
       <PageHeader
         title="Ticket Details"
-        breadcrumb={<Breadcrumb separator=">">
-          <Breadcrumb.Item >
-          {
-            state?.callee === 'board' ?
-              <Link to={'/projects'}>Boards</Link> :
-              <Link to={'/tickets'}>Tickets</Link>
-          }
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>{ticket.title}</Breadcrumb.Item>
-        </Breadcrumb>}
+        breadcrumb={
+          <Breadcrumb separator=">">
+            <Breadcrumb.Item>
+              {state?.callee === 'board' ? (
+                <Link to={'/projects'}>Boards</Link>
+              ) : (
+                <Link to={'/tickets'}>Tickets</Link>
+              )}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>{ticket.title}</Breadcrumb.Item>
+          </Breadcrumb>
+        }
       />
       <Row gutter={[16, 16]} className={classes.listRow}>
         <Col span={3}></Col>
