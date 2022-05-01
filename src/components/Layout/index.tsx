@@ -16,7 +16,7 @@ const { Content, Footer, Sider } = AntdLayout
 
 const Router = () => {
   return (
-    <Content style={{ margin: '0 16px' }}>
+    <Content style={{ margin: '16px' }}>
       <Switch>
         {ROUTE_CONFIGURATION.map((config) => (
           <Route

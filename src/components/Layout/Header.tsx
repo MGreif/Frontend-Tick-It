@@ -58,10 +58,12 @@ const Header = () => {
               selectedProject={project}
             />
           }
-          className={classes.projectDropdown}>
+          className={classes.projectDropdown}
+        >
           <button
             className={classes.button}
-            onClick={(e) => e.preventDefault()}>
+            onClick={(e) => e.preventDefault()}
+          >
             {activeProjectName || 'Projects'} <DownOutlined />
           </button>
         </Dropdown>

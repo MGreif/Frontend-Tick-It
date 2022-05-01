@@ -20,6 +20,22 @@ const formatTime = (_date: Date) => {
 const Ticket = ({ ticketData: ticket, ...props }: any) => {
   const updateTicket = useUpdateTicket()
 
+  if (props.isSpacer) {
+    return _.flowRight(
+      props.connectDragSource,
+      props.connectDropTarget
+    )(
+      <div>
+        <Card bordered style={{ height: '100px' }}></Card>
+      </div>
+    )
+  }
+
+  if (!ticket) {
+    console.log('null', ticket, props)
+    return null
+  }
+
   const actions: IGenericDrawerProps['actions'] = [
     {
       function: () => updateTicket(ticket._id, { closed: !ticket.closed }),
@@ -48,7 +64,11 @@ const Ticket = ({ ticketData: ticket, ...props }: any) => {
         title={ticket.title}
         actions={actions}
       >
-        <Card title={ticket && <CardTitle ticket={ticket} />} bordered={true}>
+        <Card
+          title={ticket && <CardTitle ticket={ticket} />}
+          bordered={true}
+          className={classes.card}
+        >
           <div style={{ position: 'relative', paddingBottom: '1.3em' }}>
             <div className={classes.labelContainer}>
               {ticket?.labels.map((label: any) => (

@@ -4,6 +4,7 @@ import { ITicket } from '../pages/tickets/types'
 import { IUser } from '../pages/users/types'
 import * as projectActionTypes from './project.actionTypes'
 import * as subBoardActionTypes from './subBoard.actionTypes'
+import { IProject } from '../types/Project.types'
 
 export interface IProjectState {
   boards: IBoard[]
@@ -17,7 +18,7 @@ export interface IProjectState {
 }
 
 export interface IRootState {
-  projects: []
+  projects: IProject[]
   activeProject: IProjectState | null
   authentication: null | {
     user: IUser
@@ -27,26 +28,26 @@ export interface IRootState {
 }
 
 const dummyUser = {
-  name: "mika",
-  password: "$2b$12$T9NW2RCbymWuRgNsM7CS4.yav9u7HL0KESGN9tyy1h90alMr3B3fa",
-  profilePicture: "/mika",
+  name: 'mika',
+  password: '$2b$12$T9NW2RCbymWuRgNsM7CS4.yav9u7HL0KESGN9tyy1h90alMr3B3fa',
+  profilePicture: '/mika',
   roles: [],
-  surname: "surMika",
-  username: "MikolasCage",
-  _id: "61ac087a5ea297b9314cf278"
+  surname: 'surMika',
+  username: 'MikolasCage',
+  _id: '61ac087a5ea297b9314cf278',
 }
 
 export const initialState: IRootState = {
   projects: [],
   activeProject: null,
   authentication: {
-    user: dummyUser
+    user: dummyUser,
   },
   isFetching: false,
   error: null,
 }
 
-function projectReducer (
+function projectReducer(
   state: IRootState = initialState,
   action: { type: string; payload: any }
 ) {
