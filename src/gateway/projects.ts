@@ -5,7 +5,7 @@ const baseUrl = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_S
 
 const fetchAllProjectsByUserId: any = (userId: string) => {
   const url = baseUrl + '/projects/by-user/' + userId
-  return superagent.get(url)
+  return superagent.get(url).set('Access-Controll-Allow-Origin', '*')
 }
 
 const fetchProjectData: any = (projectId: string) => {
