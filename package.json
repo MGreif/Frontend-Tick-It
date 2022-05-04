@@ -2,6 +2,7 @@
   "name": "frontend-tick-it",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://dummy-site/tick-it",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.17.2",

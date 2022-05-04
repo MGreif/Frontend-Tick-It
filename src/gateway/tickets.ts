@@ -1,51 +1,48 @@
 import superagent from 'superagent'
 import { ITicket } from '../pages/tickets/types'
-
-const baseUrl = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`
+import { BASE_URL } from './constants'
 
 const createNewTicket: any = (ticketData: ITicket) => {
-
-  const url = baseUrl + '/tickets'
-  return superagent
-    .post(url)
-    .send(ticketData)
+  const url = BASE_URL + '/tickets'
+  return superagent.post(url).send(ticketData)
 }
 
-const moveTicket: any = (ticketId: string, subBoardId: string, index: number) => {
-
-  const url = baseUrl + '/tickets/' + ticketId + '/move'
-  return superagent
-    .patch(url)
-    .send({ subBoardId, index })
+const moveTicket: any = (
+  ticketId: string,
+  subBoardId: string,
+  index: number
+) => {
+  const url = BASE_URL + '/tickets/' + ticketId + '/move'
+  return superagent.patch(url).send({ subBoardId, index })
 }
 
 const updateTicket: any = (ticketId: string, ticketData: ITicket) => {
   if (!ticketId) return
 
-  const url = baseUrl + '/tickets/' + ticketId
-  return superagent
-    .patch(url)
-    .send(ticketData)
+  const url = BASE_URL + '/tickets/' + ticketId
+  return superagent.patch(url).send(ticketData)
 }
 
 const getDetailedTicket: any = (ticketId: string) => {
   if (!ticketId) return
 
-  const url = baseUrl + '/tickets/' + ticketId
+  const url = BASE_URL + '/tickets/' + ticketId
 
-  return superagent
-    .get(url)
+  return superagent.get(url)
 }
 
 const deleteTicket: any = (ticketId: string) => {
   if (!ticketId) return
 
-  const url = baseUrl + '/tickets/' + ticketId
+  const url = BASE_URL + '/tickets/' + ticketId
 
-  return superagent
-    .delete(url)
+  return superagent.delete(url)
 }
 
-
-
-export { createNewTicket, updateTicket, getDetailedTicket, moveTicket, deleteTicket }
+export {
+  createNewTicket,
+  updateTicket,
+  getDetailedTicket,
+  moveTicket,
+  deleteTicket,
+}

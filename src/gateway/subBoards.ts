@@ -1,18 +1,17 @@
 import superagent from 'superagent'
 import { ISubBoard } from '../components/types'
-
-const baseUrl = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`
+import { BASE_URL } from './constants'
 
 const createNewSubBoard: any = (subBoardData: ISubBoard, boardId: string) => {
   if (!subBoardData || !boardId) return
 
-  const url = baseUrl + '/subBoards'
+  const url = BASE_URL + '/subBoards'
   return superagent.post(url).send({ ...subBoardData, boardId })
 }
 
 const deleteSubBoard: any = (subBoardId: number) => {
   if (!subBoardId) return
-  const url = baseUrl + `/subBoards/${subBoardId}`
+  const url = BASE_URL + `/subBoards/${subBoardId}`
   return superagent.delete(url)
 }
 

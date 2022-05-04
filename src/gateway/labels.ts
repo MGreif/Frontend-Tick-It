@@ -1,24 +1,17 @@
 import superagent from 'superagent'
 import { ILabel } from '../pages/labels/types'
-
-const baseUrl = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`
+import { BASE_URL } from './constants'
 
 const createNewLabel: any = (labelData: ILabel) => {
-
-  const url = baseUrl + '/labels'
-  return superagent
-    .post(url)
-    .send(labelData)
+  const url = BASE_URL + '/labels'
+  return superagent.post(url).send(labelData)
 }
 
 const deleteLabel: any = (labelId: string) => {
+  if (!labelId) throw Error('no LabelId is given')
 
-  if (!labelId) throw Error("no LabelId is given")
-
-  const url = baseUrl + '/labels/' + labelId
-  return superagent
-    .delete(url)
+  const url = BASE_URL + '/labels/' + labelId
+  return superagent.delete(url)
 }
-
 
 export { createNewLabel, deleteLabel }
