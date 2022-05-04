@@ -11,6 +11,7 @@ import CreateLabel from '../../pages/labels/CreateLabel'
 import TicketDetailPage from '../../pages/tickets/DetailPage'
 import EditTicket from '../../pages/tickets/EditTicket'
 import { CustomErrorBoundary } from '../ErrorBoundary'
+import { buildRouterLink } from '../../libs/linkBuilder'
 
 const { Content, Footer, Sider } = AntdLayout
 
@@ -21,17 +22,35 @@ const Router = () => {
         {ROUTE_CONFIGURATION.map((config) => (
           <Route
             key={config.title}
-            path={'/' + config.path}
+            path={buildRouterLink('/' + config.path)}
             component={config.component}
             exact
           />
         ))}
-        <Route path="/tickets/create" component={CreateTicket as any} />
-        <Route path="/tickets/edit/:ticketId" component={EditTicket as any} />
-        <Route path="/tickets/:ticketId" component={TicketDetailPage as any} />
-        <Route path="/labels/create" component={CreateLabel as any} />
-        <Route path="/" component={() => <span>Home</span>} />
-        <Route path="*" component={() => <span>404 - Path not found</span>} />
+        <Route
+          path={buildRouterLink('/tickets/create')}
+          component={CreateTicket as any}
+        />
+        <Route
+          path={buildRouterLink('/tickets/edit/:ticketId')}
+          component={EditTicket as any}
+        />
+        <Route
+          path={buildRouterLink('/tickets/:ticketId')}
+          component={TicketDetailPage as any}
+        />
+        <Route
+          path={buildRouterLink('/labels/create')}
+          component={CreateLabel as any}
+        />
+        <Route
+          path={buildRouterLink('/')}
+          component={() => <span>Home</span>}
+        />
+        <Route
+          path={buildRouterLink('*')}
+          component={() => <span>404 - Path not found</span>}
+        />
       </Switch>
     </Content>
   )
@@ -50,7 +69,10 @@ function Layout() {
         >
           {ROUTE_CONFIGURATION.map((config, index) => (
             <Menu.Item key={`${index + 1}`} icon={<config.icon />}>
-              <Link title={config.title} to={'/' + config.path}>
+              <Link
+                title={config.title}
+                to={buildRouterLink('/' + config.path)}
+              >
                 {config.title}
               </Link>
             </Menu.Item>

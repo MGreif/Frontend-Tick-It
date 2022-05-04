@@ -4,6 +4,7 @@ import { useParams, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import TicketDetails from '../../components/TicketDetails'
 import { useGetDetailedTicket } from '../../hooks/tickets/useGetDetailedTicket'
+import { buildRouterLink } from '../../libs/linkBuilder'
 import classes from './DetailPage.module.css'
 
 const DetailPage = () => {
@@ -26,9 +27,9 @@ const DetailPage = () => {
           <Breadcrumb separator=">">
             <Breadcrumb.Item>
               {state?.callee === 'board' ? (
-                <Link to={'/projects'}>Boards</Link>
+                <Link to={buildRouterLink('/projects')}>Boards</Link>
               ) : (
-                <Link to={'/tickets'}>Tickets</Link>
+                <Link to={buildRouterLink('/tickets')}>Tickets</Link>
               )}
             </Breadcrumb.Item>
             <Breadcrumb.Item>{ticket.title}</Breadcrumb.Item>

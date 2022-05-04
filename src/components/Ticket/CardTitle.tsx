@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { buildRouterLink } from '../../libs/linkBuilder'
 import { ITicket } from '../../pages/tickets/types'
 import classes from './CardTitle.module.css'
 
@@ -13,7 +14,7 @@ const CardTitle = ({ ticket }: ICardTitleProps) => {
       <span>
         <Link
           to={{
-            pathname: `/tickets/${ticket._id}`,
+            pathname: buildRouterLink(`/tickets/${ticket._id}`),
             state: { callee: 'board' },
           }}
         >

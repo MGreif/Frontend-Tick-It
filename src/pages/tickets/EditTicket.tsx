@@ -6,6 +6,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { useUpdateTicket } from '../../hooks/tickets/useUpdateTicket'
 import { useGetDetailedTicket } from '../../hooks/tickets/useGetDetailedTicket'
 import { useDeleteTicket } from '../../hooks/tickets/useDeleteTicket'
+import { buildRouterLink } from '../../libs/linkBuilder'
 
 const EditTicket = () => {
   const updateTicket = useUpdateTicket()
@@ -18,33 +19,59 @@ const EditTicket = () => {
   }, [ticketId, fetchTicket])
 
   const formButtons = [
-    { onClick: (data: any) => { updateTicket(ticketId, data).then(() => history.push('/tickets/' + ticketId)) }, label: 'Save',  },
-    { onClick: () => {
-        updateTicket(ticketId, { closed: !ticket.closed}).then(() => history.push('/tickets/' + ticketId))
+    {
+      onClick: (data: any) => {
+        updateTicket(ticketId, data).then(() =>
+          history.push('/tickets/' + ticketId)
+        )
+      },
+      label: 'Save',
+    },
+    {
+      onClick: () => {
+        updateTicket(ticketId, { closed: !ticket.closed }).then(() =>
+          history.push('/tickets/' + ticketId)
+        )
       },
       label: ticket.closed ? 'Re-open Ticket' : 'Close Ticket',
-      buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }
+      buttonProps: {
+        style: { marginLeft: '1em' },
+        type: 'default' as ButtonProps['type'],
+      },
     },
-    { onClick: () => {
-      deleteTicket(ticketId).then(() => history.push('/tickets'))
+    {
+      onClick: () => {
+        deleteTicket(ticketId).then(() => history.push('/tickets'))
+      },
+      label: 'Delete Ticket ',
+      buttonProps: {
+        style: { marginLeft: '1em' },
+        type: 'default' as ButtonProps['type'],
+      },
     },
-    label: 'Delete Ticket ',
-    buttonProps: { style: { marginLeft: '1em'}, type: "default" as ButtonProps["type"] }
-  }
   ]
   return (
     <div className={classes.listContainer}>
       <PageHeader
         title="Edit Ticket"
-        breadcrumb={<Breadcrumb separator=">">
-          <Breadcrumb.Item ><Link to={'/tickets/'}>Tickets</Link></Breadcrumb.Item>
-          <Breadcrumb.Item ><Link to={'/tickets/' + ticketId}>{ticket.title}</Link></Breadcrumb.Item>
-          <Breadcrumb.Item >Edit Ticket</Breadcrumb.Item>
-        </Breadcrumb>} />
+        breadcrumb={
+          <Breadcrumb separator=">">
+            <Breadcrumb.Item>
+              <Link to={buildRouterLink('/tickets/')}>Tickets</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to={buildRouterLink('/tickets/' + ticketId)}>
+                {ticket.title}
+              </Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>Edit Ticket</Breadcrumb.Item>
+          </Breadcrumb>
+        }
+      />
       <Row gutter={[16, 16]} className={classes.listRow}>
         <Col span={5}></Col>
         <Col span={14}>
-          <TicketForm actionButtons={formButtons} initialData={ticket}/>
+          <TicketForm actionButtons={formButtons} initialData={ticket} />
         </Col>
         <Col span={5}></Col>
       </Row>
