@@ -9,6 +9,7 @@ import {
 import * as projectGateway from '../../gateway/projects'
 export const useFetchProjectsByUserId = () => {
   const userId = useSelector((state) => state.authentication.user._id)
+  console.log('fetch by userId', userId)
   const dispatch = useDispatch()
   useEffect(() => {
     if (!userId) return
