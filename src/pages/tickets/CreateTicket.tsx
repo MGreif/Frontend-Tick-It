@@ -12,7 +12,9 @@ const CreateTicket = () => {
   const formButtons = [
     {
       onClick: (data: any) => {
-        createNewTicket(data).then(() => history.push('/tickets'))
+        createNewTicket(data).then(() =>
+          history.push(buildRouterLink('/tickets'))
+        )
       },
       label: 'Submit',
     },

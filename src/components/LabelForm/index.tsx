@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { IProjectState, IRootState } from '../../redux/project.reducer'
 import { useCreateNewLabel } from '../../hooks/labels/useCreateNewLabel'
 import { HuePicker } from 'react-color'
+import { buildRouterLink } from '../../libs/linkBuilder'
 
 const { TextArea } = Input
 
@@ -29,7 +30,7 @@ const LabelForm = ({ history }: ILabelFormProps) => {
       project: activeProject?._id,
     }
 
-    createNewLabel(data).then(() => history.push('/labels'))
+    createNewLabel(data).then(() => history.push(buildRouterLink('/labels')))
   }
 
   if (!activeProject) return null
@@ -40,7 +41,8 @@ const LabelForm = ({ history }: ILabelFormProps) => {
         <Form.Item
           label="Name"
           rules={[{ required: true, message: 'Please input a title' }]}
-          name="name">
+          name="name"
+        >
           <Input placeholder="Sample Label" />
         </Form.Item>
         <Form.Item label="Description" name="description" initialValue="">

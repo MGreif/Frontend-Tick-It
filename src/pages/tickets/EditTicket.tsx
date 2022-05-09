@@ -22,7 +22,7 @@ const EditTicket = () => {
     {
       onClick: (data: any) => {
         updateTicket(ticketId, data).then(() =>
-          history.push('/tickets/' + ticketId)
+          history.push(buildRouterLink('/tickets/' + ticketId))
         )
       },
       label: 'Save',
@@ -30,7 +30,7 @@ const EditTicket = () => {
     {
       onClick: () => {
         updateTicket(ticketId, { closed: !ticket.closed }).then(() =>
-          history.push('/tickets/' + ticketId)
+          history.push(buildRouterLink('/tickets/' + ticketId))
         )
       },
       label: ticket.closed ? 'Re-open Ticket' : 'Close Ticket',
@@ -41,7 +41,9 @@ const EditTicket = () => {
     },
     {
       onClick: () => {
-        deleteTicket(ticketId).then(() => history.push('/tickets'))
+        deleteTicket(ticketId).then(() =>
+          history.push(buildRouterLink('/tickets'))
+        )
       },
       label: 'Delete Ticket ',
       buttonProps: {
