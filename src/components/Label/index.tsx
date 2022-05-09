@@ -8,8 +8,19 @@ interface ILabelProps {
 }
 
 const Label = ({ labelData }: ILabelProps) => {
-  const textColor = pickTextColorBasedOnBgColor(labelData.color, "white", "black")
-  return <span className={classes.label} style={{backgroundColor: labelData.color, color: textColor}}>{labelData.name}</span>
+  const textColor = pickTextColorBasedOnBgColor(
+    labelData.color || '#cccccc',
+    'white',
+    'black'
+  )
+  return (
+    <span
+      className={classes.label}
+      style={{ backgroundColor: labelData.color, color: textColor }}
+    >
+      {labelData.name}
+    </span>
+  )
 }
 
 export default Label
