@@ -7,14 +7,15 @@ import { store } from './redux/store'
 import { useCookies } from 'react-cookie'
 
 function App() {
-  const [cookies]: any = useCookies(['cookie-name'])
+  const [cookies]: any = useCookies()
 
   const token = cookies.token
 
   console.log(token)
 
   if (!token) {
-    document.location.href = '/auth/login'
+    document.location.href =
+      process.env.REACT_APP_STANDALONE_ROOT_PATH + '/login'
   }
 
   return (
