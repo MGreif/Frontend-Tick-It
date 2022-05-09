@@ -15,7 +15,9 @@ function App() {
 
   if (!token) {
     document.location.href =
-      process.env.REACT_APP_STANDALONE_ROOT_PATH + '/login'
+      process.env.REACT_APP_STANDALONE_ROOT_PATH +
+      '/login?redirect_to=' +
+      document.location
   }
 
   return (
