@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import Layout from './components/Layout'
 import { store } from './redux/store'
 import { useCookies } from 'react-cookie'
+import * as jwt from 'jsonwebtoken'
+import { setUser } from './redux/project.actions'
 
 function App() {
   const [cookies]: any = useCookies()
@@ -18,6 +20,9 @@ function App() {
       process.env.REACT_APP_STANDALONE_ROOT_PATH +
       '/login?redirect_to=' +
       document.location
+  } else {
+    const user = jwt.decode(token)
+    setUser(user)
   }
 
   return (

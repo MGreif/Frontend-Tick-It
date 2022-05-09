@@ -78,6 +78,13 @@ function projectReducer(
         ]
       }
       return stateClone
+    case projectActionTypes.SET_USER:
+      return {
+        ...state,
+        authentication: {
+          user: action.payload,
+        },
+      }
     case subBoardActionTypes.CREATE_NEW_SUBBOARD:
       const boards: IBoard[] = action.payload.subBoardData
       if (stateClone.activeProject?.boards) {
