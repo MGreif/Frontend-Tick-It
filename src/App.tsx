@@ -15,11 +15,14 @@ function App() {
 
   console.log(token)
 
-  if (!token) {
-    //document.location.href =
-    // process.env.REACT_APP_STANDALONE_ROOT_PATH +
-    //   '/login?redirect_to=' +
-    //    document.location
+  if (
+    !token &&
+    !new URLSearchParams(window.location.search).get('redirect_to')
+  ) {
+    document.location.href =
+      process.env.REACT_APP_STANDALONE_ROOT_PATH +
+      '/login?redirect_to=' +
+      document.location
   } else {
     const user = jwt.decode(token)
     console.log('user', user)
