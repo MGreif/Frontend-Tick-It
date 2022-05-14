@@ -31,3 +31,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.loggedIn {
+  color: white;
+  font-weight: bold;
+}

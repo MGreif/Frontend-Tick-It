@@ -73,7 +73,11 @@ const Header = () => {
             </button>
           </Dropdown>
         </div>
-        {user && <span>Logged in as: {user.username}</span>}
+        {user && (
+          <span className={classes.loggedIn}>
+            Logged in as: {user.username}
+          </span>
+        )}
       </div>
     </AntdHeader>
   )
