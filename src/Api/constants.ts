@@ -1,0 +1,1 @@
+export const BASE_URL = import.meta.env.VITE_SERVICE_HOST + ":" + import.meta.env.VITE_SERVICE_PORT
