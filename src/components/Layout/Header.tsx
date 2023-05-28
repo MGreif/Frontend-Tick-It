@@ -1,16 +1,17 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Dropdown, Layout } from "antd"
 import { useSelector } from "react-redux"
 import classes from "./Header.module.css"
 import { DownOutlined } from "@ant-design/icons"
 import Menu from "antd/lib/menu"
-import { useProjectSlice, dummyUser } from "../../redux/project.reducer"
-import { IUser } from "../../pages/users/types"
+import { useProjectSlice } from "../../redux/project.reducer"
 import {
     useGetProjectDataQuery,
     useGetProjectsByUserQuery,
+    useLazyGetProjectsByUserQuery,
 } from "../../Api/projects"
 import { IProjectSimpleDTO } from "../../types/Project.types"
+import { useUserSlice } from "../../redux/user.reducer"
 
 const { Header: AntdHeader } = Layout
 
@@ -45,8 +46,16 @@ const HeaderMenu = ({ projects, onClick, selectedProject }: IMenu) => {
 const Header = () => {
     const { activeProjectId, changeProject } = useProjectSlice()
     const { data: activeProject } = useGetProjectDataQuery(activeProjectId)
-    const user = dummyUser
-    const { data: projects } = useGetProjectsByUserQuery(dummyUser._id)
+    const user = useUserSlice()
+    console.log(user)
+    const [trigger, { data: projects}]= useLazyGetProjectsByUserQuery()
+
+
+    useEffect(() => {
+        if (user.loggedInUser) {
+            trigger(user.loggedInUser._id)
+        }
+    }, [user.loggedInUser])
 
     const handleClick = (id: string) => {
         console.log("set project", id)

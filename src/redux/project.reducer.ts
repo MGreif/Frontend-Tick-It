@@ -1,16 +1,9 @@
-import { IBoard } from "../types/Board.types"
-import { ILabel } from "../pages/labels/types"
-import { ITicket } from "../pages/tickets/types"
-import { IUser } from "../pages/users/types"
-import * as projectActionTypes from "./project.actionTypes"
-import * as subBoardActionTypes from "./subBoard.actionTypes"
 import { TProjectDTO } from "../types/Project.types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { useEffect, useReducer } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { TReduxStore } from "./store"
 import {
-    useGetProjectDataQuery,
     useLazyGetProjectDataQuery,
 } from "../Api/projects"
 
@@ -21,6 +14,7 @@ export interface IProjectRootState {
 export const dummyUser = {
     name: "mika",
     password: "$2b$12$T9NW2RCbymWuRgNsM7CS4.yav9u7HL0KESGN9tyy1h90alMr3B3fa",
+    keycloakId: "7eb440ae-fb2e-48d5-bb56-96d5fbc567fd",
     profilePicture: "/mika",
     roles: [],
     surname: "surMika",

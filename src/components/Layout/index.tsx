@@ -3,7 +3,6 @@ import { Route, Link, Routes, redirect, useNavigate } from "react-router-dom"
 import { Layout as AntdLayout, Menu } from "antd"
 import { getMenuItemBasedOnUrl } from "../../libs/getMenuItemBasedOnUrl"
 import { ROUTE_CONFIGURATION } from "../../constants/appConfiguration"
-import { useFetchProjectsByUserId } from "../../hooks/projects/useFetchProjectsByUserId"
 import Header from "./Header"
 import CreateTicket from "../../pages/tickets/CreateTicket"
 import CreateLabel from "../../pages/labels/CreateLabel"
@@ -15,18 +14,6 @@ import { Dashboard } from "../../pages/projects/Dashboard"
 import { useProjectSlice } from "../../redux/project.reducer"
 
 const { Content, Footer, Sider } = AntdLayout
-
-const DashboardCheck = ({ children }: any) => {
-    const { activeProjectId } = useProjectSlice()
-    const navigate = useNavigate()
-    console.log("activeProjectId", activeProjectId)
-    if (!activeProjectId) {
-        navigate(buildRouterLink("/projects"))
-        return <></>
-    }
-
-    return <>{children}</>
-}
 
 const Router = () => {
     return (
@@ -66,16 +53,6 @@ const Router = () => {
             </Routes>
         </Content>
     )
-}
-
-const Redirector = ({ children }: { children: ReactElement }) => {
-    const activeProject = useProjectSlice().activeProject
-    const navigate = useNavigate()
-    if (!activeProject) {
-        navigate("/projects")
-        return null
-    }
-    return children
 }
 
 function Layout() {

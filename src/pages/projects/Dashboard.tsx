@@ -2,32 +2,22 @@ import React, {
     ReactElement,
     useEffect,
     useLayoutEffect,
-    useState,
 } from "react"
-import { useSelector } from "react-redux"
-import { Button, Card, Row, Col } from "antd"
-import { useFetchProjectData } from "../../hooks/projects/useFetchProjectData"
+import { Button, Card } from "antd"
 import {
-    change,
     dummyUser,
-    IProjectRootState,
     useProjectSlice,
 } from "../../redux/project.reducer"
 import GenericModal from "../../components/GenericModal"
 import classes from "./Dashboard.module.css"
 import ProjectForm from "../../components/ProjectForm"
-import { IUser } from "../users/types"
-import { useCreateNewProject } from "../../hooks/projects/useCreateNewProject"
 import {
     useCreateProjectMutation,
-    useGetProjectDataQuery,
     useGetProjectsByUserQuery,
     useLazyGetProjectDataQuery,
 } from "../../Api/projects"
-import { IProjectSimpleDTO, TProjectDTO } from "../../types/Project.types"
-import { TReduxStore } from "../../redux/store"
+import { IProjectSimpleDTO } from "../../types/Project.types"
 import { useNavigate } from "react-router-dom"
-import { buildRouterLink } from "../../libs/linkBuilder"
 
 export const Dashboard: React.FC<any> = ({
     children,

@@ -1,6 +1,3 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { IProjectSimpleDTO, TProjectDTO } from "../types/Project.types"
-import { BASE_URL } from "../gateway/constants"
 import { ETags } from "./tags"
 import { IBoard } from "../types/Board.types"
 import { emptySplitApi } from "./emptySplitApi"

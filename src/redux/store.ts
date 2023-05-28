@@ -1,11 +1,8 @@
-import { createStore } from "redux"
 import { IProjectRootState, reducer } from "./project.reducer"
-import rootReducer from "./rootReducer"
 import { compose, configureStore } from "@reduxjs/toolkit"
-import { projectApi } from "../Api/projects"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { TProjectDTO } from "../types/Project.types"
 import { emptySplitApi } from "../Api/emptySplitApi"
+import { IUserState, userReducer } from "./user.reducer"
 
 const composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -15,6 +12,7 @@ const store = configureStore({
     reducer: {
         [emptySplitApi.reducerPath]: emptySplitApi.reducer,
         project: reducer,
+        user: userReducer
     },
     devTools: true,
     middleware: (getDefaultMiddleware) =>
@@ -22,7 +20,8 @@ const store = configureStore({
 })
 
 export type TReduxStore = {
-    project: IProjectRootState
+    project: IProjectRootState,
+    user: IUserState
 }
 
 setupListeners(store.dispatch)

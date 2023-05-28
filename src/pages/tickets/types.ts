@@ -1,4 +1,5 @@
 import { ISubBoard } from "../../components/types";
+import { TUser } from "../../redux/user.reducer";
 import { ILabel } from "../labels/types";
 import { IUser } from "../users/types";
 
@@ -7,7 +8,7 @@ export interface ITicket {
     title: string,
     description: string,
     createdAt: Date,
-    createdBy: IUser,
+    createdBy: TUser,
     updatedAt: Date,
     weight: number,
     dateDue: Date,

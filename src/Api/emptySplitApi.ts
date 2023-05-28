@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { ETags } from "./tags"
-import { BASE_URL } from "../gateway/constants"
+import { BASE_URL } from "./constants"
 
 export const emptySplitApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),

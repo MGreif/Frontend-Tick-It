@@ -1,7 +1,7 @@
 import { ILabel } from "../pages/labels/types"
 import { IBoard } from "./Board.types"
 import { ITicket } from "../pages/tickets/types"
-import { IUser } from "../pages/users/types"
+import { TUser } from "../redux/user.reducer"
 
 export interface IProjectSimpleDTO {
     _id: string
@@ -16,5 +16,5 @@ export type TProjectDTO = Omit<IProjectSimpleDTO, "members"> & {
     labels: ILabel[]
     boards: IBoard[]
     tickets: ITicket[]
-    members: IUser[]
+    members: TUser[]
 }

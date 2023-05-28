@@ -1,8 +1,6 @@
 import React, { useEffect } from "react"
 import { Form, Input, Select } from "antd"
-import { useSelector } from "react-redux"
-import { IProjectRootState, useProjectSlice } from "../../redux/project.reducer"
-import { ILabel } from "../../pages/labels/types"
+import { useProjectSlice } from "../../redux/project.reducer"
 import { useForm } from "antd/lib/form/Form"
 import Label from "../Label"
 
