@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from "antd"
 import { useSelector } from 'react-redux'
-import { IProjectState, IRootState } from '../redux/project.reducer'
+import { IProjectState, IProjectRootState } from '../redux/project.reducer'
 import { ILabel } from '../pages/labels/types'
 
 const { Option } = Select
@@ -12,7 +12,7 @@ interface ILabelSelectProps {
 }
 
 const LabelSelect = ({ onChange, selectedLabels }: ILabelSelectProps) => {
-  const activeProject = useSelector<IRootState, IProjectState | null>((state: IRootState) => state.activeProject)
+  const activeProject = useSelector<IProjectRootState, IProjectState | null>((state: IProjectRootState) => state.activeProject)
 
   return (
     <Select

@@ -4,7 +4,7 @@ import { BASE_URL } from './constants'
 
 const fetchAllProjectsByUserId: any = (userId: string) => {
   const url = BASE_URL + '/projects/by-user/' + userId
-  return superagent.get(url).set('Access-Controll-Allow-Origin', '*')
+  return superagent.get(url)
 }
 
 const fetchProjectData: any = (projectId: string) => {

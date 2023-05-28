@@ -1,12 +1,12 @@
-import * as ticketGateway from '../../gateway/tickets'
+import { useMoveTicketMutation } from "../../Api/tickets"
 
 export const useMoveTicket = () => {
-  return async (ticketId, subBoardId, index) => {
-    try {
-      await ticketGateway.moveTicket(ticketId, subBoardId, index)
-    } catch (error) {
-      console.error(error)
+    const [moveTicket] = useMoveTicketMutation()
+    return async (ticketId, subBoardId, index) => {
+        try {
+            await moveTicket({ ticketId, subBoardId, index })
+        } catch (error) {
+            console.error(error)
+        }
     }
-  }
 }
-

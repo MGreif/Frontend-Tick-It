@@ -6,7 +6,7 @@ import { useForm } from 'antd/lib/form/Form'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ITicket } from '../../pages/tickets/types'
-import { IProjectState, IRootState } from '../../redux/project.reducer'
+import { IProjectState, IProjectRootState } from '../../redux/project.reducer'
 import LabelSelect from '../LabelSelect'
 import classes from './EditSection.module.css'
 
@@ -18,7 +18,7 @@ interface IEditSectionProps {
 }
 
 const EditSection = ({ ticketData, setInnerState, innerState }: IEditSectionProps) => {
-  const boardOptions = useSelector<IRootState, IProjectState | null>(state => state.activeProject)?.boards.reduce((acc,curr) => { 
+  const boardOptions = useSelector<IProjectRootState, IProjectState | null>(state => state.activeProject)?.boards.reduce((acc, curr) => {
     const option = {
       value: curr._id,
       label: curr.name,
