@@ -4,10 +4,8 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 import { IBoard } from "../../types/Board.types"
 import SubBoard from "./SubBoard"
 import classes from "./index.module.css"
-import { useMoveTicket } from "../../hooks/tickets/useMoveTicket"
-import { fetchProjectData } from "../../hooks/projects/useFetchProjectData"
 import { useDispatch, useSelector } from "react-redux"
-import { IProjectRootState, useProjectSlice } from "../../redux/project.reducer"
+import { IProjectRootState, useGetProject, useProjectSlice } from "../../redux/project.reducer"
 import { useMoveTicketMutation } from "../../Api/tickets"
 
 interface ISubBoardListProps {
@@ -16,9 +14,8 @@ interface ISubBoardListProps {
 
 const SubBoardList = ({ board }: ISubBoardListProps) => {
     const [moveTicketDrop] = useMoveTicketMutation()
-    const projectId = useProjectSlice().activeProject?._id
-    const dispatch = useDispatch()
-    if (!board || !projectId) return null
+    const { activeProject } = useGetProject()
+    if (!board || !activeProject) return null
 
     if (!board.subBoards.length) return <div>No Board Tiles available</div>
 

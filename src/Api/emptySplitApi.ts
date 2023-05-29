@@ -11,5 +11,6 @@ export const emptySplitApi = createApi({
         ETags.BOARDS,
         ETags.TICKETS,
         ETags.LABELS,
+        ETags.USERS
     ],
 })

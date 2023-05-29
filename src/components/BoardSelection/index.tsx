@@ -1,22 +1,41 @@
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
-import { IProjectRootState, useProjectSlice } from "../../redux/project.reducer"
+import { IProjectRootState, useGetProject, useProjectSlice } from "../../redux/project.reducer"
 import { Button, Dropdown, Input, Menu } from "antd"
-import classes from "./index.module.css"
-import { useCreateNewBoard } from "../../hooks/useCreateNewBoard"
+import classesModule from "./index.module.css"
 import { CheckCircleOutlined } from "@ant-design/icons"
-import GenericModal from "../GenericModal"
 import { useCreateBoardMutation } from "../../Api/boards"
+import { createStyles } from "@mantine/core"
 
 interface IBoardSelectionProps {
     setBoard: any
     board: any
 }
 
+const useStyles = createStyles({
+    input: {
+        width: "220px !important",
+        borderTopRightRadius: "0px !important",
+        borderBottomRightRadius: "0px !important"
+    },
+    button: {
+        borderTopLeftRadius: "0px !important",
+        borderBottomLeftRadius: "0px !important"
+    },
+    addContainer: {
+        width: "300px",
+        display: "inline-block"
+    },
+    container: {
+        display: "flex",
+        gap: "1em",
+        flexWrap: "nowrap"
+    }
+})
+
 const AddBoard = () => {
     const [boardName, setBoardName] = useState("")
-    const { activeProject } = useProjectSlice()
-
+    const { activeProject } = useGetProject()
+    const { classes } = useStyles()
     const [trigger] = useCreateBoardMutation()
     const handleAddClick = () => {
         if (boardName !== "") {
@@ -29,28 +48,27 @@ const AddBoard = () => {
     }
 
     return (
-        <span onClick={(e) => e.stopPropagation()}>
-            <Input.Group compact>
+        <span onClick={(e) => e.stopPropagation()} className={classes.addContainer}>
                 <Input
-                    style={{ width: "calc(100% - 56px)" }}
                     defaultValue="Sample Board"
+                    className={classes.input}
                     onChange={(e) => setBoardName(e.target.value)}
                 />
-                <Button type="primary" onClick={handleAddClick}>
+                <Button type="primary" onClick={handleAddClick} className={classes.button}>
                     Add
                 </Button>
-            </Input.Group>
         </span>
     )
 }
 
 const BoardSelection = (props: IBoardSelectionProps) => {
-    const { activeProject } = useProjectSlice()
+    const { activeProject } = useGetProject()
+    const { classes } = useStyles()
 
     const DropdownMenu = () => {
         const boards = activeProject?.boards || []
         return (
-            <Menu className={classes.menu}>
+            <Menu className={classesModule.menu}>
                 {boards.map((boardItem: any) => (
                     <Menu.Item
                         key={boardItem.name}
@@ -66,23 +84,35 @@ const BoardSelection = (props: IBoardSelectionProps) => {
                 ))}
                 <Menu.Item
                     key="new-project"
-                    className={classes.newProjectOption}
+                    className={classesModule.newProjectOption}
                 >
-                    <AddBoard />
+                    
                 </Menu.Item>
             </Menu>
         )
     }
 
     if (!activeProject) return null
+    const boards = activeProject?.boards || []
 
-    return (
-        <Dropdown overlay={() => <DropdownMenu />} placement="bottomLeft" arrow>
-            <Button>
-                {props.board ? `Board - ${props.board.name}` : "Board Auswahl"}
-            </Button>
-        </Dropdown>
-    )
+    const boardsJSX = boards.map((boardItem: any) => (
+        <Button
+            key={boardItem.name}
+            onClick={() => props.setBoard(boardItem)}
+            disabled={boardItem._id === props.board?._id}
+        >
+            <span>
+                {boardItem.name}{" "}
+                {boardItem._id === props.board?._id && (
+                    <CheckCircleOutlined color="green" />
+                )}
+            </span>
+        </Button>
+    ))
+
+    const newBoard = <AddBoard />
+
+    return <div className={classes.container}>{[...boardsJSX, newBoard]}</div>
 }
 
 export default BoardSelection

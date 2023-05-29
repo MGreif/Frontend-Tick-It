@@ -1,14 +1,17 @@
-import { TProjectDTO } from "../types/Project.types"
+import { IProjectSimpleDTO, TProjectDTO } from "../types/Project.types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { TReduxStore } from "./store"
 import {
-    useLazyGetProjectDataQuery,
+    useGetProjectDataQuery,
+    useLazyGetProjectDataQuery, useLazyGetProjectsByUserQuery,
 } from "../Api/projects"
 
 export interface IProjectRootState {
     activeProjectId: string | null
+    activeProject: TProjectDTO | null
+    projects: IProjectSimpleDTO[]
 }
 
 export const dummyUser = {
@@ -24,6 +27,8 @@ export const dummyUser = {
 
 export const initialState: IProjectRootState = {
     activeProjectId: null,
+    activeProject: null,
+    projects: []
 }
 
 const projectSlice = createSlice({
@@ -31,32 +36,44 @@ const projectSlice = createSlice({
     initialState,
     reducers: {
         change(state, action: PayloadAction<string>) {
-            console.log(action, "awdawdawdawd")
             state.activeProjectId = action.payload
         },
+        updateActiveProject(state, action: PayloadAction<TProjectDTO>) {
+            state.activeProject = action.payload
+        },
+        updateProjects(state, action: PayloadAction<IProjectSimpleDTO[]>) {
+            state.projects = action.payload
+        }
     },
 })
 
-export const useProjectSlice = () => {
-    const activeProjectId = useSelector<TReduxStore, string>(
-        (state) => state.project.activeProjectId as string
-    )
-    const [trigger, result] = useLazyGetProjectDataQuery()
+
+export const useGetProject = () => {
+    const {activeProjectId} = useProjectSlice()
+    const [fetch,{data: activeProject}] = useLazyGetProjectDataQuery()
 
     useEffect(() => {
-        if (activeProjectId) {
-            trigger(activeProjectId, true)
-        }
+        console.log("change project", activeProjectId)
+        activeProjectId && fetch(activeProjectId)
     }, [activeProjectId])
 
-    useEffect(() => {
-        console.log(result.data)
-    }, [result])
+    return {
+        activeProject,
+        activeProjectId,
+        refetch: (id: string) => id && fetch(id)
+    }
+}
+
+
+export const useProjectSlice = () => {
+    const {activeProjectId, projects} = useSelector<TReduxStore, IProjectRootState>(
+        (state) => state.project
+    )
 
     const dispatch = useDispatch()
     return {
-        activeProject: result.data,
         activeProjectId,
+        projects,
         changeProject: (id: TProjectDTO["_id"]) =>
             dispatch(projectSlice.actions.change(id)),
     }

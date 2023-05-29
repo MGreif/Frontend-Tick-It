@@ -4,4 +4,5 @@ export enum ETags {
     TICKETS = "tickets",
     LABELS = "labels",
     BOARDS = "boards",
+    USERS = "users"
 }

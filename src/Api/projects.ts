@@ -24,7 +24,7 @@ export const projectApi = emptySplitApi.injectEndpoints({
             keepUnusedDataFor: 36000,
             providesTags: (result) => (result ? [{ type: ETags.PROJECT }] : []),
         }),
-        createProject: builder.mutation<TProjectDTO, Partial<TProjectDTO>>({
+        createProject: builder.mutation<TProjectDTO, Partial<IProjectSimpleDTO>>({
             query: (project) => ({
                 url: BASE,
                 method: "POST",

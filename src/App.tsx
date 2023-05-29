@@ -1,13 +1,25 @@
 import { MantineProvider, Text } from "@mantine/core"
-import BoardDashboard from "./pages/boards/Dashboard"
 import { BrowserRouter } from "react-router-dom"
-import React from "react"
+import React, { useEffect } from "react"
 import Layout from "./components/Layout"
-import { Dashboard } from "./pages/projects/Dashboard"
 import { useUserSlice } from "./redux/user.reducer"
+import { useLazyGetUserQuery } from "./Api/users"
+import { Auth } from "./Auth/Auth"
 
 export default function App() {
-    useUserSlice()
+    const { changeUser } = useUserSlice()
+    const [getUser] = useLazyGetUserQuery()
+    
+
+
+    useEffect(() => {
+        if (Auth.getUserId()) {
+            getUser(Auth.getUserId()).then((res) => {
+                res.data && changeUser(res.data)
+            })
+        }
+    }, [])
+
     return (
         <MantineProvider withGlobalStyles withNormalizeCSS>
             <BrowserRouter>

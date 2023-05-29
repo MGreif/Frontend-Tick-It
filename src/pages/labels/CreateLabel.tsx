@@ -2,8 +2,6 @@ import React from 'react'
 import { Breadcrumb, Col, Row } from 'antd'
 import classes from './List.module.css'
 import LabelForm from '../../components/LabelForm'
-import { Link } from 'react-router-dom'
-import { buildRouterLink } from '../../libs/linkBuilder'
 
 const CreateLabel = ({ history }: any) => {
   return (

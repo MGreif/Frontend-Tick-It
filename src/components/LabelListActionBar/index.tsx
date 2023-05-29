@@ -1,19 +1,14 @@
 import { Button } from "antd"
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { buildRouterLink } from "../../libs/linkBuilder"
+import { Link } from "react-router-dom"
 import classes from "./index.module.css"
 
 const ActionBar = () => {
-    const navigate = useNavigate()
-    const handleClick = () => {
-        navigate(buildRouterLink("/labels/create"))
-    }
     return (
         <div className={classes.container}>
-            <Button type="primary" href="/labels/create" onClick={handleClick}>
+            <Link type="primary" to="/labels/create">
                 <span>New Label</span>
-            </Button>
+            </Link>
             <Button>Test</Button>
         </div>
     )

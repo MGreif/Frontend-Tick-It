@@ -5,7 +5,7 @@ import { ButtonProps } from 'antd/lib/button'
 interface IGenericModalProps {
   title: string
   content: React.FC<{ setInnerState: any; innerState: any; initialValues: any }>
-  actions: [{ label: string; function: Function; buttonProps?: ButtonProps }]
+  actions: [{ label: string; function: (innerstate: any) => void; buttonProps?: ButtonProps }]
   buttonLabel: any
   buttonClass?: any
   buttonProps?: ButtonProps

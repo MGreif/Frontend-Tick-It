@@ -3,14 +3,13 @@ import { useSelector } from "react-redux"
 import { Col, Row } from "antd"
 import { IBoard } from "../../types/Board.types"
 import classes from "./Dashboard.module.css"
-import { useProjectSlice } from "../../redux/project.reducer"
+import { useGetProject } from "../../redux/project.reducer"
 import BoardListActionBar from "../../components/BoardListActionBar"
 import SubBoardList from "../../components/SubBoardList"
 import { useNavigate } from "react-router-dom"
 
 const BoardDashboard = () => {
-    const { activeProject } = useProjectSlice()
-
+    const { activeProject } = useGetProject()
     const [board, setBoard] = useState<IBoard | null>(
         activeProject?.boards[0] || null
     )

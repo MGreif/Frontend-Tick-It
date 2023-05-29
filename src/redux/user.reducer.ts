@@ -1,19 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { TReduxStore } from "./store"
-import { Auth } from "../Auth/Auth"
-import { useLazyGetUserQuery } from "../Api/users"
+import { useEffect } from "react"
 
 export type TUser = {
     _id: string,
-    name: string,
-    surname: string,
-    username: string,
     keycloakId: string,
-    password: string,
-    profilePicture: string,
-    roles: string[]
 }
 
 export interface IUserState {
@@ -21,42 +13,29 @@ export interface IUserState {
 }
 
 export const initialState: IUserState = {
-    loggedInUser: null
+    loggedInUser: null,
 }
 
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        change(state, action: PayloadAction<TUser>) {
-            state.loggedInUser = action.payload
+        change(state, action: PayloadAction<Partial<IUserState>>) {
+            if (action.payload.loggedInUser) state.loggedInUser = action.payload.loggedInUser
         },
     },
 })
 
 export const useUserSlice = () => {
-    const loggedInUser = useSelector<TReduxStore, TUser | null>(
-        (state) => state.user.loggedInUser
+    const { loggedInUser } = useSelector<TReduxStore, IUserState>(
+        (state) => state.user
     )
-    const [trigger, result] = useLazyGetUserQuery()
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        console.log(Auth.kc)
-        if (Auth.kc.tokenParsed?.sub) {
-            trigger(Auth.kc.tokenParsed?.sub, true)
-        }
-    }, [])
-
-    useEffect(() => {
-        console.log(result.data)
-        if (result.data) dispatch(userSlice.actions.change(result.data))
-    }, [result])
 
     return {
         loggedInUser,
         changeUser: (user: TUser) =>
-            dispatch(userSlice.actions.change(user)),
+            dispatch(userSlice.actions.change({loggedInUser: user})),
     }
 }
 

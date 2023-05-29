@@ -8,6 +8,7 @@ import CardTitle from "./CardTitle"
 import classes from "./index.module.css"
 import {
     IProjectRootState,
+    useGetProject,
     useProjectSlice,
 } from "../../../redux/project.reducer"
 import { ITicket } from "../../../pages/tickets/types"
@@ -33,7 +34,7 @@ const SubBoard = ({
     removeDeleteButton,
     onTicketDrop,
 }: ISubBoardProps) => {
-    const tickets = useProjectSlice().activeProject?.tickets || []
+    const tickets = useGetProject().activeProject?.tickets || []
     const correspondingTickets = showClosed
         ? tickets.filter((ticket) => ticket.closed)
         : isBacklog

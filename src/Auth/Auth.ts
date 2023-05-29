@@ -22,4 +22,12 @@ export class Auth {
     public static getUserDetails = () => {
         return this.kc.userInfo
     }
+
+    public static getUserId = () => {
+        return this.kc.idTokenParsed?.sub as string
+    }
+
+    public static logout = () => {
+        this.kc.logout()
+    }
 }

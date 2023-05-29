@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react"
-import { Dropdown, Layout } from "antd"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { Button, Dropdown, Input, Layout } from "antd"
 import classes from "./Header.module.css"
 import { DownOutlined } from "@ant-design/icons"
 import Menu from "antd/lib/menu"
-import { useProjectSlice } from "../../redux/project.reducer"
+import { useGetProject, useProjectSlice } from "../../redux/project.reducer"
 import {
+    useCreateProjectMutation,
     useGetProjectDataQuery,
     useGetProjectsByUserQuery,
     useLazyGetProjectsByUserQuery,
 } from "../../Api/projects"
 import { IProjectSimpleDTO } from "../../types/Project.types"
 import { useUserSlice } from "../../redux/user.reducer"
+import { createStyles } from "@mantine/core"
+import { Auth } from "../../Auth/Auth"
+import { useDeleteUsersMutation } from "../../Api/users"
+import GenerateModal from "../GenericModal"
+import Label from "../Label"
+import ProjectForm from "../ProjectForm"
 
 const { Header: AntdHeader } = Layout
 
@@ -20,6 +26,16 @@ interface IMenu {
     onClick: (id: string) => void
     selectedProject: IProjectSimpleDTO | null
 }
+
+const useStyles = createStyles({
+    nameContainer: {
+        display: "flex",
+        gap: "1em",
+        marginRight: "1em",
+        color: "white",
+        alignItems: "center"
+    }
+})
 
 const HeaderMenu = ({ projects, onClick, selectedProject }: IMenu) => {
     return (
@@ -45,22 +61,15 @@ const HeaderMenu = ({ projects, onClick, selectedProject }: IMenu) => {
 
 const Header = () => {
     const { activeProjectId, changeProject } = useProjectSlice()
-    const { data: activeProject } = useGetProjectDataQuery(activeProjectId)
     const user = useUserSlice()
-    console.log(user)
-    const [trigger, { data: projects}]= useLazyGetProjectsByUserQuery()
-
-
-    useEffect(() => {
-        if (user.loggedInUser) {
-            trigger(user.loggedInUser._id)
-        }
-    }, [user.loggedInUser])
-
+    const { classes: classes2 } = useStyles()
+    const { data: projects } = useGetProjectsByUserQuery(user.loggedInUser?._id as string, { skip: !user.loggedInUser?._id})
+    const project = useGetProject()
     const handleClick = (id: string) => {
-        console.log("set project", id)
         changeProject(id)
     }
+
+    const [createProject, result] = useCreateProjectMutation()
 
     return (
         <AntdHeader>
@@ -84,9 +93,33 @@ const Header = () => {
                             className={classes.button}
                             onClick={(e) => e.preventDefault()}
                         >
-                            {activeProject?.name || "Projects"} <DownOutlined />
+                            {project.activeProject?.name || "Projects"} <DownOutlined />
                         </button>
                     </Dropdown>
+                    <GenerateModal title="Create new Project" buttonLabel="Create Project" actions={[{
+                        label: "Create",
+                        function: (content) => {
+                            createProject({
+                                name: content.name,
+                                description: content.description,
+                                createdBy: user.loggedInUser?._id,
+                                members: [user.loggedInUser?._id as string]
+                            }).then(() => {
+                                project.refetch(project.activeProjectId as string)
+                            })   
+                        }
+                    }]}
+                    content={ProjectForm}
+                    />
+                </div>
+                <div className={classes2.nameContainer}>
+                        <span>
+                            Logged in as:
+                        </span>
+                        <span>
+                            {Auth.kc.tokenParsed?.name}
+                        </span>
+                        <Button onClick={Auth.logout}>LOGOUT</Button>
                 </div>
             </div>
         </AntdHeader>

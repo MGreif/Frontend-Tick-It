@@ -11,7 +11,7 @@ import {
 } from "antd"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
 import classes from "./index.module.css"
-import { useProjectSlice, dummyUser } from "../../redux/project.reducer"
+import { useProjectSlice, dummyUser, useGetProject } from "../../redux/project.reducer"
 import Label from "../Label"
 import { IUser } from "../../pages/users/types"
 import { ITicket } from "../../pages/tickets/types"
@@ -27,7 +27,7 @@ interface ITicketFormProps {
 
 const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
     const [form] = Form.useForm()
-    const { activeProject } = useProjectSlice()
+    const { activeProject } = useGetProject()
 
     const loggedInUser = dummyUser
 
@@ -92,7 +92,6 @@ const TicketForm = ({ actionButtons, initialData }: ITicketFormProps) => {
                             defaultValue={form.getFieldValue("assignee")}
                             options={activeProject?.members.map((member) => ({
                                 value: member._id,
-                                label: member.name,
                             }))}
                             style={{ width: 200 }}
                             placeholder="Max Musterman"

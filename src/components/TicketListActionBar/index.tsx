@@ -5,15 +5,11 @@ import { buildRouterLink } from "../../libs/linkBuilder"
 import classes from "./index.module.css"
 
 const ActionBar = () => {
-    const navigate = useNavigate()
-    const handleClick = () => {
-        navigate("/tickets/create", { replace: true })
-    }
     return (
         <div className={classes.container}>
-            <Button type="primary" href="/tickets/create" onClick={handleClick}>
+            <Link type="primary" to="/tickets/create">
                 <span>New Ticket</span>
-            </Button>
+            </Link>
             <Button>Test</Button>
         </div>
     )

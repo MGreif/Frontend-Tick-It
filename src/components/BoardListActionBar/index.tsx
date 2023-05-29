@@ -23,7 +23,6 @@ const BoardListActionBar = ({ setBoard, board }: IBoardListActionBar) => {
                     {
                         label: "Submit",
                         function: (data: any) => {
-                            console.log(data)
                             createSubBoard({ data, boardId: board?._id || "" })
                         },
                     },
